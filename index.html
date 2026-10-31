@@ -281,7 +281,7 @@
 
   <header class="app-header">
     <h1>Dental Pro</h1>
-    <span class="badge-endo">Endodonti Modülü</span>
+    <span class="badge-endo">Endodonti Uzmanlık</span>
   </header>
 
   <!-- FORM KARTI -->
@@ -305,7 +305,7 @@
         </div>
 
         <div class="form-group">
-          <label>Hızlı İşlem Seçimi</label>
+          <label>Hızlı İşlem Seçimi (Endodonti)</label>
           <div class="quick-tags" id="procedureTags">
             <button type="button" class="tag-btn" onclick="selectTag(this, 'Kanal Tedavisi (KT)')">KT</button>
             <button type="button" class="tag-btn" onclick="selectTag(this, 'Kanal Yenileme (Re-Tx)')">Re-Tx</button>
@@ -407,7 +407,6 @@
     let db = [];
     let chartInstance = null;
 
-    // Başlangıç Ayarları
     document.addEventListener("DOMContentLoaded", () => {
       const today = new Date().toISOString().split('T')[0];
       const currentMonth = today.slice(0, 7);
@@ -469,7 +468,6 @@
       db.push(record);
       saveData();
 
-      // Form Sıfırlama
       document.getElementById('patient').value = '';
       document.getElementById('tooth').value = '';
       document.getElementById('amount').value = '';
@@ -489,7 +487,6 @@
       const selectedMonth = document.getElementById('reportMonth').value;
       const filtered = db.filter(item => item.date.startsWith(selectedMonth));
 
-      // Hesaplamalar
       let total = 0, selfTotal = 0, otherTotal = 0;
 
       filtered.forEach(item => {
@@ -501,13 +498,11 @@
         }
       });
 
-      // İstatistik Güncelleme
       document.getElementById('statTotal').innerText = total.toLocaleString('de-DE', {minimumFractionDigits: 2}) + ' €';
       document.getElementById('statCount').innerText = filtered.length;
       document.getElementById('statSelf').innerText = selfTotal.toLocaleString('de-DE', {minimumFractionDigits: 2}) + ' €';
       document.getElementById('statOther').innerText = otherTotal.toLocaleString('de-DE', {minimumFractionDigits: 2}) + ' €';
 
-      // Liste Güncelleme
       const listEl = document.getElementById('recordList');
       listEl.innerHTML = '';
 
@@ -548,7 +543,6 @@
     function renderChart(records) {
       const ctx = document.getElementById('monthlyChart').getContext('2d');
       
-      // Günlere göre grupla
       const days = {};
       records.forEach(r => {
         const day = r.date.split('-')[2];
@@ -617,4 +611,4 @@
     }
   </script>
 </body>
-</html>
+    </html>
