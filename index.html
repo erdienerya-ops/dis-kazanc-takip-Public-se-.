@@ -7,25 +7,19 @@
 <title>Dental Pro</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-:root{
---bg:#0b1422;--card:#142338;--line:#263b52;
---text:#f3f7fb;--muted:#91a5ba;--teal:#35d0bd;
---red:#ff7474;--gold:#f3c978;
-}
+:root{--bg:#0b1422;--line:#263b52;--text:#f3f7fb;--muted:#91a5ba;--teal:#35d0bd;--red:#ff7474}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:radial-gradient(ellipse at 50% -15%,#1b3a50,#0b1422 48%);color:var(--text);padding:0 14px 40px}
 .app{max-width:720px;margin:auto}
 header{display:flex;justify-content:space-between;align-items:center;padding:24px 2px 18px}
 .brand{display:flex;align-items:center;gap:11px}
 .logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(145deg,#43ddc8,#138c88);display:grid;place-items:center;color:#062b2a;font-size:23px;font-weight:bold}
-.brand h1{font-size:20px}
-.brand p{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px}
+.brand h1{font-size:20px}.brand p{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px}
 .pill{font-size:11px;color:var(--teal);border:1px solid #2a776f;background:#12312f;padding:8px 11px;border-radius:99px}
 .hero{background:linear-gradient(125deg,#17364a,#14283c,#123b3a);border:1px solid #285064;border-radius:24px;padding:20px;margin-bottom:15px}
 .hero-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#c4d8e3}
 .hero input{width:140px;background:#0c2130;color:white;border:1px solid #355365;padding:7px;border-radius:9px}
-.hero-total{font-size:36px;font-weight:850;margin:16px 0 5px}
-.hero-foot{font-size:12px;color:#a9c4d1}
+.hero-total{font-size:36px;font-weight:850;margin:16px 0 5px}.hero-foot{font-size:12px;color:#a9c4d1}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
 .stat{background:#111f31;border:1px solid var(--line);border-radius:16px;padding:13px 10px}
 .stat span{font-size:10px;color:var(--muted);display:block;margin-bottom:7px}
@@ -33,13 +27,11 @@ header{display:flex;justify-content:space-between;align-items:center;padding:24p
 .stat small{font-size:10px;color:var(--muted);display:block;margin-top:4px}
 .card{background:linear-gradient(160deg,#142338,#101d2d);border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:15px}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px}
-.section-head h3{font-size:16px}
-.section-head p{font-size:11px;color:var(--muted);margin-top:5px}
+.section-head h3{font-size:16px}.section-head p{font-size:11px;color:var(--muted);margin-top:5px}
 label{display:block;color:#a9bbcd;font-size:11px;font-weight:bold;margin-bottom:7px}
-input,select,textarea{width:100%;background:#0b1726;border:1px solid #2a4057;color:white;padding:12px;border-radius:11px;font-size:14px;outline:none;min-width:0}
-input:focus,select:focus,textarea:focus{border-color:var(--teal)}
-.field{margin-bottom:13px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+input,select{width:100%;background:#0b1726;border:1px solid #2a4057;color:white;padding:12px;border-radius:11px;font-size:14px;outline:none;min-width:0}
+input:focus,select:focus{border-color:var(--teal)}
+.field{margin-bottom:13px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .tooth-head{display:flex;justify-content:space-between;align-items:center;margin:15px 0 10px;font-size:13px}
 .count{font-size:10px;color:var(--teal);background:#123a39;padding:6px 9px;border-radius:20px}
 .tooth-row{background:#0c1928;border:1px solid #263b50;border-radius:14px;padding:12px;margin-bottom:9px}
@@ -55,22 +47,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal)}
 .tabs{display:flex;gap:5px;background:#0b1726;padding:4px;border-radius:12px;border:1px solid var(--line);margin-bottom:13px}
 .tab{flex:1;padding:10px 6px;background:transparent;color:var(--muted);border:0;border-radius:9px;font-size:12px;font-weight:bold}
 .tab.active{background:#20364b;color:white}
-.record{padding:13px 0;border-bottom:1px solid var(--line)}
-.record:last-child{border:0}
+.record{padding:13px 0;border-bottom:1px solid var(--line)}.record:last-child{border:0}
 .record-top{display:flex;justify-content:space-between;gap:10px}
-.patient{font-weight:bold;font-size:14px}
-.meta{font-size:10px;color:var(--muted);margin-top:5px}
+.patient{font-weight:bold;font-size:14px}.meta{font-size:10px;color:var(--muted);margin-top:5px}
 .sum{font-size:15px;color:var(--teal);font-weight:bold;white-space:nowrap}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .chip{font-size:10px;color:#c2d7e4;background:#1a3045;border:1px solid #2c465e;padding:6px 8px;border-radius:8px}
 .actions{text-align:right;margin-top:8px}
 .delete{background:none;border:0;color:#ff8585;font-size:11px;padding:5px}
 .empty{text-align:center;padding:25px 10px;color:var(--muted);font-size:12px;line-height:1.7}
-.chart-wrap{height:220px}
-.backup{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.chart-wrap{height:220px}.backup{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .backup button{padding:12px;border:1px solid var(--line);background:#0d1a29;color:#d8e5ef;border-radius:11px;font-size:11px;font-weight:bold}
-.hidden{display:none!important}
-.footer{text-align:center;color:#526a80;font-size:10px;padding:8px}
+.hidden{display:none!important}.footer{text-align:center;color:#526a80;font-size:10px;padding:8px}
 @media(max-width:390px){
 .stats{gap:6px}.stat{padding:11px 7px}.stat strong{font-size:12px}
 .hero-total{font-size:31px}.tooth-fields{grid-template-columns:.65fr 1.3fr 1fr}
@@ -155,7 +143,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal)}
 </div>
 
 <button class="primary" type="submit">KAYDI TAMAMLA ↗</button>
-<p class="note">Her dişin işlem türünü ve ücretini ayrı belirleyebilirsin. Ücretleri istediğin gibi değiştirebilirsin.</p>
+<p class="note">Her dişin işlem türünü ve ücretini ayrı belirleyebilirsin.</p>
 </form>
 </section>
 
@@ -188,21 +176,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal)}
 
 <script>
 const DB_KEY='dental_pro_patient_db_v1';
+
 const procedures=[
-'Kanal Tedavisi (KT)',
-'Kanal Yenileme (Re-Tx)',
-'Post-Core',
-'MTA / Apeks',
-'Kesik / Pansuman',
-'Daimi Dolgu',
-'Kırık Eğe Çıkarma',
-'Acil / Konsültasyon',
-'Diğer'
+'KT Kesik',
+'KT Dolgu',
+'RT Kesik',
+'RT Dolgu',
+'Dolgu',
+'Post + Dolgu',
+'MTA'
 ];
 
 let db=[];
 let chart=null;
-
 const $=id=>document.getElementById(id);
 
 function localDate(){
@@ -314,10 +300,9 @@ $('otherDoctor').required=other;
 
 function saveRecord(event){
 event.preventDefault();
-
 const lines=getLines();
 
-if(lines.some(line=>!line.tooth||!line.amount||line.amount<0)){
+if(lines.some(line=>!line.tooth||!line.amount)){
 alert('Her işlem için diş numarası ve sıfırdan büyük ücret gir.');
 return;
 }
@@ -364,18 +349,10 @@ return Number(record.amount)||0;
 function render(){
 const month=$('reportMonth').value;
 const today=localDate();
-
 const monthly=db.filter(r=>r.date&&r.date.slice(0,7)===month);
 const total=monthly.reduce((s,r)=>s+totalOf(r),0);
-
-const todayTotal=db
-.filter(r=>r.date===today)
-.reduce((s,r)=>s+totalOf(r),0);
-
-const selfTotal=monthly
-.filter(r=>r.doctorType!=='other')
-.reduce((s,r)=>s+totalOf(r),0);
-
+const todayTotal=db.filter(r=>r.date===today).reduce((s,r)=>s+totalOf(r),0);
+const selfTotal=monthly.filter(r=>r.doctorType!=='other').reduce((s,r)=>s+totalOf(r),0);
 const count=monthly.reduce((s,r)=>s+(r.lines?.length||1),0);
 
 $('statTotal').textContent=money(total);
@@ -434,14 +411,9 @@ renderChart(monthly);
 
 function renderChart(records){
 const canvas=$('monthlyChart');
-
-if(chart){
-chart.destroy();
-chart=null;
-}
+if(chart){chart.destroy();chart=null;}
 
 const sums={};
-
 records.forEach(record=>{
 sums[record.date]=(sums[record.date]||0)+totalOf(record);
 });
@@ -497,11 +469,9 @@ records:db
 const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
 const url=URL.createObjectURL(blob);
 const link=document.createElement('a');
-
 link.href=url;
 link.download='dental-pro-yedek-'+localDate()+'.json';
 link.click();
-
 URL.revokeObjectURL(url);
 }
 
@@ -510,35 +480,28 @@ const file=event.target.files[0];
 if(!file)return;
 
 const reader=new FileReader();
-
 reader.onload=()=>{
 try{
 const parsed=JSON.parse(reader.result);
 const incoming=Array.isArray(parsed)?parsed:parsed.records;
 
-if(!Array.isArray(incoming)){
-throw new Error('Geçersiz yedek');
-}
+if(!Array.isArray(incoming))throw new Error('Geçersiz yedek');
 
 if(!incoming.every(r=>r&&typeof r.patient==='string'&&typeof r.date==='string')){
 throw new Error('Geçersiz kayıt');
 }
 
-if(!confirm(incoming.length+' kayıt yüklenecek. Mevcut kayıtların üzerine yazılsın mı?')){
-return;
-}
+if(!confirm(incoming.length+' kayıt yüklenecek. Mevcut kayıtların üzerine yazılsın mı?'))return;
 
 db=incoming;
 saveData();
 alert('Yedek başarıyla yüklendi.');
-
 }catch(error){
 alert('Yedek dosyası geçersiz veya okunamadı.');
 }finally{
 event.target.value='';
 }
 };
-
 reader.readAsText(file);
 }
 
@@ -546,10 +509,8 @@ $('addTooth').addEventListener('click',()=>addToothRow());
 $('doctorType').addEventListener('change',toggleDoctor);
 $('recordForm').addEventListener('submit',saveRecord);
 $('reportMonth').addEventListener('change',render);
-
 $('tabList').addEventListener('click',()=>switchTab('list'));
 $('tabChart').addEventListener('click',()=>switchTab('chart'));
-
 $('exportBtn').addEventListener('click',exportData);
 $('importBtn').addEventListener('click',()=>$('fileInput').click());
 $('fileInput').addEventListener('change',importData);
