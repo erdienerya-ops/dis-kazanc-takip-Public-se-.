@@ -1,434 +1,308 @@
-
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#102b46">
-<title>Dental Pro | Kazanç Takibi</title>
-<style>
-:root {
-  --navy:#102b46;
-  --blue:#176b82;
-  --teal:#21a6a0;
-  --bg:#f2f6f9;
-  --white:#fff;
-  --text:#24384b;
-  --muted:#788b9c;
-  --line:#e3ebf0;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,sans-serif;
-}
-header{
-  background:linear-gradient(135deg,#102b46,#176b82);
-  color:white;padding:27px 20px 35px;
-}
-.header-inner,.container{max-width:760px;margin:auto}
-.logo{font-size:13px;letter-spacing:2px;opacity:.8}
-header h1{margin:12px 0 5px;font-size:27px}
-header p{margin:0;color:#d4e8ee;font-size:14px}
-.container{padding:0 15px 30px;margin-top:-17px}
-.card{
-  background:white;border-radius:16px;padding:19px;
-  margin-bottom:15px;box-shadow:0 5px 20px #102b4610;
-}
-h2{font-size:17px;margin:0 0 17px;color:var(--navy)}
-label{
-  display:block;font-size:13px;font-weight:bold;
-  margin:13px 0 6px;color:#536a7d;
-}
-input,select,textarea{
-  width:100%;padding:13px;border:1px solid var(--line);
-  border-radius:10px;background:#fbfdfe;color:var(--text);
-  font-size:15px;outline:none;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:var(--teal);
-}
-textarea{resize:vertical;min-height:75px}
-button{
-  border:0;border-radius:10px;padding:14px;
-  font-size:15px;font-weight:bold;cursor:pointer;
-}
-.primary{
-  background:var(--teal);color:white;width:100%;margin-top:18px;
-}
-.secondary{background:#eaf3f5;color:var(--blue);width:100%}
-.danger{background:#fff0ef;color:#b64b46;padding:9px 12px}
-.stats{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-}
-.stat{
-  background:#f1f7f9;border:1px solid #e5eff2;
-  border-radius:12px;padding:15px;min-width:0;
-}
-.stat span{font-size:12px;color:var(--muted)}
-.stat strong{
-  display:block;font-size:20px;color:var(--navy);
-  margin-top:9px;overflow-wrap:anywhere;
-}
-.stat.accent{background:#e9f7f5;border-color:#d8efeb}
-.stat.accent strong{color:#168b82}
-.small{font-size:12px;color:var(--muted);line-height:1.6}
-.record{
-  border-bottom:1px solid var(--line);padding:14px 0;
-}
-.record:last-child{border:0}
-.record-top{display:flex;justify-content:space-between;gap:10px}
-.record-name{font-weight:bold;color:var(--navy)}
-.record-amount{font-weight:bold;color:#168b82;white-space:nowrap}
-.record-info{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
-.record-actions{display:flex;justify-content:flex-end;margin-top:8px}
-.empty{text-align:center;padding:20px;color:var(--muted);font-size:14px}
-.pill{
-  display:inline-block;background:#e8f5f3;color:#168b82;
-  border-radius:20px;padding:5px 9px;font-size:11px;margin-top:7px;
-}
-.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.hidden{display:none}
-@media(max-width:390px){
-  .stat strong{font-size:17px}
-  header h1{font-size:24px}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <title>Dental Pro | Endodonti Kazanç Takibi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .tooth-btn {
+            transition: all 0.15s ease;
+        }
+        .tooth-btn.selected {
+            background-color: #0d9488 !important;
+            color: white !important;
+            border-color: #0f766e !important;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-<header>
-  <div class="header-inner">
-    <div class="logo">DENTAL PROFESSIONAL</div>
-    <h1>Dental Pro</h1>
-    <p>Kişisel işlem ve kazanç takip paneli</p>
-  </div>
-</header>
+    <!-- Compact Navigation Bar -->
+    <header class="bg-gradient-to-r from-navy-900 via-slate-800 to-navy-900 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-500">
+                    <i class="fa-solid fa-tooth text-base"></i>
+                </div>
+                <div>
+                    <h1 class="text-base font-bold tracking-tight leading-none text-white">Dental<span class="text-brand-500">Pro</span> <span class="text-xs font-normal text-teal-300 ml-1">Endodonti Panel</span></h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 text-xs text-slate-300">
+                <span id="currentDateDisplay" class="hidden sm:inline-block font-medium bg-slate-800/80 px-3 py-1 rounded-lg border border-slate-700"></span>
+            </div>
+        </div>
+    </header>
 
-<main class="container">
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex-grow w-full space-y-6">
 
-  <section class="card">
-    <h2>＋ Yeni işlem kaydı</h2>
+        <!-- 1. EN ÜSTTE DOĞRUDAN İŞLEM EKLEME FORMU -->
+        <section class="bg-white rounded-2xl border border-teal-100 shadow-md shadow-teal-500/5 p-4 sm:p-5 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-brand-500"></div>
+            
+            <form id="mainRecordForm" onsubmit="handleMainFormSubmit(event)" class="space-y-3.5">
+                <!-- Row 1: Tarih - Hasta Adı - Diş No -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">İşlem Tarihi *</label>
+                        <input type="date" id="date" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                    </div>
 
-    <label for="date">İşlem tarihi *</label>
-    <input type="date" id="date">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Hasta Adı Soyadı *</label>
+                        <input type="text" id="patient" required placeholder="Hasta Adı Soyadı" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                    </div>
 
-    <label for="patient">Hasta adı *</label>
-    <input type="text" id="patient" placeholder="Hasta adı">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-[11px] font-bold text-slate-600 uppercase">Diş No</label>
+                            <button type="button" onclick="toggleToothPicker()" class="text-[10px] text-brand-600 hover:underline font-semibold flex items-center gap-1">
+                                <i class="fa-solid fa-tooth"></i> Şemadan Seç
+                            </button>
+                        </div>
+                        <input type="text" id="tooth" placeholder="Örn: 16, 21 veya 46" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                    </div>
+                </div>
 
-    <label for="tooth">Diş numarası</label>
-    <input type="text" id="tooth" placeholder="Örn. 16">
+                <!-- Diş Şeması Seçim Kutusu -->
+                <div id="toothPickerBox" class="hidden p-3 bg-slate-50 rounded-xl border border-slate-200 text-center space-y-2">
+                    <div class="text-[11px] font-semibold text-slate-600 mb-1">Diş Numarası Seçiniz (Çoklu Seçim Yapabilirsiniz)</div>
+                    <!-- Üst Çene -->
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <span class="text-[10px] text-slate-400 self-center mr-1">Üst:</span>
+                        <script>
+                            [18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28].forEach(t => {
+                                document.write(`<button type="button" onclick="selectToothNum('${t}')" class="tooth-btn text-[11px] font-medium w-6.5 h-6.5 rounded border border-slate-200 bg-white hover:bg-slate-100">${t}</button>`);
+                            });
+                        </script>
+                    </div>
+                    <!-- Alt Çene -->
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <span class="text-[10px] text-slate-400 self-center mr-1">Alt:</span>
+                        <script>
+                            [48,47,46,45,44,43,42,41,31,32,33,34,35,36,37,38].forEach(t => {
+                                document.write(`<button type="button" onclick="selectToothNum('${t}')" class="tooth-btn text-[11px] font-medium w-6.5 h-6.5 rounded border border-slate-200 bg-white hover:bg-slate-100">${t}</button>`);
+                            });
+                        </script>
+                    </div>
+                    <div class="pt-1">
+                        <button type="button" onclick="clearSelectedTeeth()" class="text-[10px] text-red-500 hover:underline">Seçimi Temizle</button>
+                    </div>
+                </div>
 
-    <label for="procedure">Yapılan işlem *</label>
-    <input type="text" id="procedure" placeholder="Örn. Dolgu, kanal tedavisi">
+                <!-- Row 2: Yapılan İşlem + Endodonti Hızlı Seçim Etiketleri -->
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Yapılan İşlem *</label>
+                    <input type="text" id="procedure" required placeholder="Örn: Kanal Tedavisi (KT), Re-Tx" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                    
+                    <!-- Endodonti Hızlı Butonlar -->
+                    <div class="flex flex-wrap gap-1.5 mt-2">
+                        <button type="button" onclick="setProcedure('Kanal Tedavisi (KT)')" class="px-2.5 py-1 bg-teal-50 hover:bg-teal-100 text-brand-800 rounded-lg text-[11px] font-semibold border border-teal-200 transition-colors">+ KT</button>
+                        <button type="button" onclick="setProcedure('Kanal Yenileme (Re-Tx)')" class="px-2.5 py-1 bg-teal-50 hover:bg-teal-100 text-brand-800 rounded-lg text-[11px] font-semibold border border-teal-200 transition-colors">+ Re-Tx</button>
+                        <button type="button" onclick="setProcedure('Post-Core Uygulaması')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-medium border border-slate-200 transition-colors">+ Post-Core</button>
+                        <button type="button" onclick="setProcedure('Apeksifikasyon / MTA')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-medium border border-slate-200 transition-colors">+ MTA / Apeks</button>
+                        <button type="button" onclick="setProcedure('Kesik / Pansuman')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-medium border border-slate-200 transition-colors">+ Kesik / Pansuman</button>
+                        <button type="button" onclick="setProcedure('Daimi Dolgu')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-medium border border-slate-200 transition-colors">+ Daimi Dolgu</button>
+                        <button type="button" onclick="setProcedure('Kırık Eğe Çıkarma')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-medium border border-slate-200 transition-colors">+ Eğe Çıkarma</button>
+                        <button type="button" onclick="setProcedure('Acil / Konsültasyon')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-medium border border-slate-200 transition-colors">+ Acil / Kons.</button>
+                    </div>
+                </div>
 
-    <label for="doctorType">İşlemi yapan doktor *</label>
-    <select id="doctorType" onchange="toggleDoctor()">
-      <option value="self">Ben yaptım</option>
-      <option value="other">Diğer doktor yaptı</option>
-    </select>
+                <!-- Row 3: Doktor Seçimi & Kazanç Tutarı -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">İşlemi Yapan Doktor *</label>
+                        <select id="doctorType" onchange="toggleDoctorField()" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                            <option value="self">Ben Yaptım</option>
+                            <option value="other">Diğer Doktor Yaptı</option>
+                        </select>
+                    </div>
 
-    <div id="otherDoctorBox" class="hidden">
-      <label for="otherDoctor">Doktor arkadaşının adı *</label>
-      <input type="text" id="otherDoctor" placeholder="Doktor adı">
-    </div>
+                    <div id="otherDoctorBox" class="hidden">
+                        <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Doktor Adı *</label>
+                        <input type="text" id="otherDoctor" placeholder="Doktor Adı Soyadı" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                    </div>
 
-    <label for="amount">Kazanç (€) *</label>
-    <input type="number" id="amount" min="0" step="0.01" placeholder="Örn. 50">
+                    <div class="sm:col-span-1">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-[11px] font-bold text-slate-600 uppercase">Kazanç Tutarı *</label>
+                            <select id="currencySymbol" onchange="render()" class="text-[11px] bg-transparent text-brand-700 font-bold outline-none cursor-pointer">
+                                <option value="€">EUR (€)</option>
+                                <option value="₺">TRY (₺)</option>
+                                <option value="$">USD ($)</option>
+                            </select>
+                        </div>
+                        <input type="number" id="amount" step="0.01" min="0" required placeholder="0.00" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                        
+                        <!-- Endodonti Hızlı Tutar Butonları -->
+                        <div class="flex flex-wrap gap-1 mt-1.5">
+                            <button type="button" onclick="addAmount(50)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[10px] font-semibold">+50</button>
+                            <button type="button" onclick="addAmount(100)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[10px] font-semibold">+100</button>
+                            <button type="button" onclick="addAmount(150)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[10px] font-semibold">+150</button>
+                            <button type="button" onclick="addAmount(200)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[10px] font-semibold">+200</button>
+                            <button type="button" onclick="addAmount(250)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[10px] font-semibold">+250</button>
+                            <button type="button" onclick="addAmount(300)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-[10px] font-semibold">+300</button>
+                        </div>
+                    </div>
+                </div>
 
-    <label for="note">Ek bilgi</label>
-    <textarea id="note" placeholder="İşlemle ilgili ek notlar..."></textarea>
+                <!-- Row 4: Ek Bilgi Notları -->
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Ek Notlar (Kanal Sayısı, Seans, Materyal vb.)</label>
+                    <input type="text" id="note" placeholder="Örn: 3 kanal, 2. seans, MTA tıkacı yapıldı" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:bg-white outline-none">
+                </div>
 
-    <button class="primary" onclick="addRecord()">İşlemi Kaydet</button>
-  </section>
+                <!-- Form Gönder Butonu -->
+                <div class="pt-1 flex gap-2">
+                    <button type="submit" class="flex-grow py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl shadow-md shadow-brand-500/20 active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-plus-circle text-sm"></i>
+                        <span>İŞLEMİ SİSTEME KAYDET</span>
+                    </button>
+                    <button type="button" onclick="resetMainForm()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs rounded-xl transition-all">
+                        Temizle
+                    </button>
+                </div>
+            </form>
+        </section>
 
-  <section class="card">
-    <h2>Genel durum</h2>
-    <div class="stats">
-      <div class="stat accent">
-        <span>Bu ay toplam kazanç</span>
-        <strong id="currentTotal">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Bu ay işlem sayısı</span>
-        <strong id="currentCount">0</strong>
-      </div>
-      <div class="stat">
-        <span>Kendi işlemlerim</span>
-        <strong id="currentSelf">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Diğer doktorlar</span>
-        <strong id="currentOther">0 €</strong>
-      </div>
-    </div>
-  </section>
+        <!-- 2. GENEL DURUM & İSTATİSTİKLER -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Bu Ay Toplam Kazanç</span>
+                        <h3 id="statTotalIncome" class="text-xl font-bold text-slate-900 mt-0.5">0,00 €</h3>
+                    </div>
+                    <div class="p-2.5 bg-teal-50 text-brand-600 rounded-xl">
+                        <i class="fa-solid fa-wallet text-base"></i>
+                    </div>
+                </div>
+                <div class="mt-2 flex items-center text-[11px] text-slate-500" id="statMonthLabel">
+                    <i class="fa-regular fa-calendar mr-1"></i> Bu Ay
+                </div>
+            </div>
 
-  <section class="card">
-    <h2>Aylık rapor</h2>
-    <label for="month">Raporlanacak ay</label>
-    <input type="month" id="month" onchange="render()">
-    <div class="stats" style="margin-top:12px">
-      <div class="stat accent">
-        <span>Toplam kazanç</span>
-        <strong id="reportTotal">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Toplam işlem</span>
-        <strong id="reportCount">0</strong>
-      </div>
-      <div class="stat">
-        <span>Kendi kazancım</span>
-        <strong id="reportSelf">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Diğer doktorların kazancı</span>
-        <strong id="reportOther">0 €</strong>
-      </div>
-    </div>
-  </section>
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Kendi Kazancım</span>
+                        <h3 id="statSelfIncome" class="text-xl font-bold text-slate-900 mt-0.5">0,00 €</h3>
+                    </div>
+                    <div class="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                        <i class="fa-solid fa-user-doctor text-base"></i>
+                    </div>
+                </div>
+                <div class="mt-2 flex items-center text-[11px] text-blue-600 font-medium" id="statSelfShare">
+                    %0 toplam pay
+                </div>
+            </div>
 
-  <section class="card">
-    <h2>İşlem geçmişi</h2>
-    <div id="records"></div>
-  </section>
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Diğer Doktorlar</span>
+                        <h3 id="statOtherIncome" class="text-xl font-bold text-slate-900 mt-0.5">0,00 €</h3>
+                    </div>
+                    <div class="p-2.5 bg-purple-50 text-purple-600 rounded-xl">
+                        <i class="fa-solid fa-user-group text-base"></i>
+                    </div>
+                </div>
+                <div class="mt-2 flex items-center text-[11px] text-purple-600 font-medium" id="statOtherShare">
+                    %0 toplam pay
+                </div>
+            </div>
 
-  <section class="card">
-    <h2>Veri yedekleme</h2>
-    <p class="small">Kayıtlarını telefonuna JSON dosyası olarak indir. Telefon veya tarayıcı değiştirirsen bu dosyayı kullanarak geri yükleyebilirsin.</p>
-    <button class="secondary" onclick="backup()">Yedeği indir</button>
-    <label for="restoreFile">Yedek dosyasını seç</label>
-    <input type="file" id="restoreFile" accept=".json,application/json">
-    <button class="secondary" style="margin-top:10px" onclick="restore()">Yedeği geri yükle</button>
-  </section>
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Toplam İşlem Adedi</span>
+                        <h3 id="statTotalCount" class="text-xl font-bold text-slate-900 mt-0.5">0</h3>
+                    </div>
+                    <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+                        <i class="fa-solid fa-tooth text-base"></i>
+                    </div>
+                </div>
+                <div class="mt-2 flex items-center text-[11px] text-slate-500" id="statAverageAmount">
+                    Ortalama: 0,00 €
+                </div>
+            </div>
+        </section>
 
-  <p class="small">
-    Veriler bu tarayıcıda saklanır. Düzenli yedek al.
-    Hasta bilgileri hassas olduğundan gerçek hasta verilerini
-    kaydetmeden önce kurumunun veri güvenliği ve gizlilik
-    kurallarını dikkate al.
-  </p>
-</main>
+        <!-- 3. GRAFİKLER VE DÖNEMSEL ANALİZ -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <h2 class="text-sm font-bold text-slate-900">Aylık Kazanç Trendi</h2>
+                        <p class="text-[11px] text-slate-400">Son 6 ayın gelişim grafiği</p>
+                    </div>
+                </div>
+                <div class="h-52 relative">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
 
-<script>
-let data = [];
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                <div>
+                    <h2 class="text-sm font-bold text-slate-900 mb-0.5">Doktor Payı Dağılımı</h2>
+                    <p class="text-[11px] text-slate-400 mb-2">Seçili aydaki oransal dağılım</p>
+                </div>
+                <div class="h-44 relative flex items-center justify-center">
+                    <canvas id="doctorPieChart"></canvas>
+                </div>
+                <div class="text-center text-[10px] text-slate-400 mt-1">
+                    Otomatik güncellenir
+                </div>
+            </div>
+        </section>
 
-try {
-  const saved = JSON.parse(localStorage.getItem("dentalProRecords") || "[]");
-  if (Array.isArray(saved)) data = saved;
-} catch(e) {
-  data = [];
-}
-
-function localDate(d) {
-  return d.getFullYear() + "-" +
-    String(d.getMonth()+1).padStart(2,"0") + "-" +
-    String(d.getDate()).padStart(2,"0");
-}
-
-const now = new Date();
-document.getElementById("date").value = localDate(now);
-document.getElementById("month").value = localDate(now).slice(0,7);
-
-function euro(value) {
-  return Number(value || 0).toLocaleString("de-DE", {
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
-  }) + " €";
-}
-
-function toggleDoctor() {
-  const other = document.getElementById("doctorType").value === "other";
-  document.getElementById("otherDoctorBox").classList.toggle("hidden", !other);
-}
-
-function persist() {
-  localStorage.setItem("dentalProRecords", JSON.stringify(data));
-  render();
-}
-
-function addRecord() {
-  const date = document.getElementById("date").value;
-  const patient = document.getElementById("patient").value.trim();
-  const tooth = document.getElementById("tooth").value.trim();
-  const procedure = document.getElementById("procedure").value.trim();
-  const doctorType = document.getElementById("doctorType").value;
-  const doctorName = document.getElementById("otherDoctor").value.trim();
-  const amountText = document.getElementById("amount").value;
-  const amount = Number(amountText);
-  const note = document.getElementById("note").value.trim();
-
-  if (!date || !patient || !procedure || amountText === "" ||
-      !Number.isFinite(amount) || amount < 0) {
-    alert("Lütfen tarih, hasta adı, işlem ve geçerli kazanç miktarını gir.");
-    return;
-  }
-
-  if (doctorType === "other" && !doctorName) {
-    alert("Diğer doktorun adını gir.");
-    return;
-  }
-
-  data.push({
-    id: Date.now().toString() + Math.random().toString(16).slice(2),
-    date, patient, tooth, procedure, doctorType,
-    doctorName: doctorType === "other" ? doctorName : "",
-    amount, note
-  });
-
-  persist();
-
-  document.getElementById("patient").value = "";
-  document.getElementById("tooth").value = "";
-  document.getElementById("procedure").value = "";
-  document.getElementById("amount").value = "";
-  document.getElementById("note").value = "";
-  document.getElementById("otherDoctor").value = "";
-  document.getElementById("doctorType").value = "self";
-  toggleDoctor();
-
-  alert("İşlem başarıyla kaydedildi.");
-}
-
-function removeRecord(id) {
-  if (!confirm("Bu işlem kaydını silmek istediğine emin misin?")) return;
-  data = data.filter(x => x.id !== id);
-  persist();
-}
-
-function sum(arr) {
-  return arr.reduce((total,x) => total + Number(x.amount || 0), 0);
-}
-
-function render() {
-  const currentMonth = localDate(new Date()).slice(0,7);
-  const selectedMonth = document.getElementById("month").value;
-
-  const current = data.filter(x => x.date && x.date.startsWith(currentMonth));
-  const monthly = data.filter(x => x.date && x.date.startsWith(selectedMonth));
-
-  const selfCurrent = current.filter(x => x.doctorType !== "other");
-  const otherCurrent = current.filter(x => x.doctorType === "other");
-  const selfMonthly = monthly.filter(x => x.doctorType !== "other");
-  const otherMonthly = monthly.filter(x => x.doctorType === "other");
-
-  document.getElementById("currentTotal").textContent = euro(sum(current));
-  document.getElementById("currentCount").textContent = current.length;
-  document.getElementById("currentSelf").textContent = euro(sum(selfCurrent));
-  document.getElementById("currentOther").textContent = euro(sum(otherCurrent));
-
-  document.getElementById("reportTotal").textContent = euro(sum(monthly));
-  document.getElementById("reportCount").textContent = monthly.length;
-  document.getElementById("reportSelf").textContent = euro(sum(selfMonthly));
-  document.getElementById("reportOther").textContent = euro(sum(otherMonthly));
-
-  const list = document.getElementById("records");
-  list.innerHTML = "";
-
-  const sorted = [...monthly].sort((a,b) => b.date.localeCompare(a.date));
-
-  if (!sorted.length) {
-    list.innerHTML = '<div class="empty">Bu ay henüz işlem kaydı bulunmuyor.</div>';
-    return;
-  }
-
-  sorted.forEach(x => {
-    const record = document.createElement("div");
-    record.className = "record";
-
-    const top = document.createElement("div");
-    top.className = "record-top";
-
-    const name = document.createElement("div");
-    name.className = "record-name";
-    name.textContent = x.patient || "İsimsiz kayıt";
-
-    const amount = document.createElement("div");
-    amount.className = "record-amount";
-    amount.textContent = euro(x.amount);
-
-    top.append(name,amount);
-
-    const info = document.createElement("div");
-    info.className = "record-info";
-    info.textContent =
-      x.date + " • " + (x.tooth ? "Diş: " + x.tooth + " • " : "") +
-      (x.procedure || "");
-
-    const doctor = document.createElement("div");
-    doctor.className = "pill";
-    doctor.textContent = x.doctorType === "other"
-      ? "Doktor: " + (x.doctorName || "Diğer doktor")
-      : "Kendi işlemim";
-
-    record.append(top,info,doctor);
-
-    if (x.note) {
-      const note = document.createElement("div");
-      note.className = "record-info";
-      note.textContent = "Ek bilgi: " + x.note;
-      record.appendChild(note);
-    }
-
-    const actions = document.createElement("div");
-    actions.className = "record-actions";
-
-    const del = document.createElement("button");
-    del.className = "danger";
-    del.textContent = "Kaydı sil";
-    del.onclick = () => removeRecord(x.id);
-
-    actions.appendChild(del);
-    record.appendChild(actions);
-    list.appendChild(record);
-  });
-}
-
-function backup() {
-  const blob = new Blob([JSON.stringify(data,null,2)], {
-    type:"application/json"
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "dental-pro-yedek.json";
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url),1000);
-}
-
-function restore() {
-  const file = document.getElementById("restoreFile").files[0];
-  if (!file) {
-    alert("Önce yedek dosyasını seç.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function() {
-    try {
-      const imported = JSON.parse(reader.result);
-      if (!Array.isArray(imported) || !imported.every(x =>
-        x && typeof x.date === "string" &&
-        typeof x.patient === "string" &&
-        typeof x.procedure === "string" &&
-        Number.isFinite(Number(x.amount))
-      )) {
-        throw new Error("Invalid backup");
-      }
-
-      if (!confirm("Mevcut kayıtların yerine yedek dosyasındaki kayıtlar yüklenecek. Devam edilsin mi?")) return;
-
-      data = imported;
-      persist();
-      alert("Yedek başarıyla geri yüklendi.");
-    } catch(e) {
-      alert("Dosya okunamadı veya yedek geçersiz.");
-    }
-  };
-  reader.readAsText(file);
-}
-
-render();
-</script>
-</body>
-</html>
+        <!-- 4. İŞLEM GEÇMİŞİ VE ARAMA / FİLTRELEME -->
+        <section class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+            <!-- Tablo Başlığı
