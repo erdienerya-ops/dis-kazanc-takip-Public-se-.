@@ -1,291 +1,681 @@
-
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#102b46">
-<title>Dental Pro | Kazanç Takibi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<title>Dental Pro | İşlem Takibi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#102b46;
-  --navy2:#173c59;
-  --blue:#176b82;
-  --teal:#21a6a0;
-  --bg:#f1f5f9;
-  --white:#fff;
-  --text:#24384b;
-  --muted:#8293a3;
-  --line:#e5edf2;
+:root {
+  --primary: #06b6d4;
+  --primary-gradient: linear-gradient(135deg, #0d9488 0%, #06b6d4 100%);
+  --accent-glow: rgba(6, 182, 212, 0.25);
+  --bg: #0f172a;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --input-bg: rgba(15, 23, 42, 0.6);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.12);
+  --success: #10b981;
+  --radius: 20px;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:15px}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,sans-serif;
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
-header{
-  background:linear-gradient(135deg,var(--navy),var(--blue));
-  color:white;padding:27px 20px 42px;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
 }
-.header-inner,.container{max-width:760px;margin:auto}
-.logo{font-size:11px;letter-spacing:2.5px;color:#b9d7e2;font-weight:bold}
-.hero-row{
-  display:flex;align-items:flex-end;
-  justify-content:space-between;gap:12px;
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 90px;
 }
-header h1{margin:12px 0 5px;font-size:29px}
-header p{margin:0;color:#d4e8ee;font-size:14px}
-.hero-date{font-size:12px;color:#d4e8ee}
-.container{padding:0 15px 105px;margin-top:-20px}
-.card{
-  background:white;border-radius:18px;padding:19px;
-  margin-bottom:15px;box-shadow:0 5px 22px #102b4610;
+
+header {
+  padding: 32px 20px 24px;
+  position: relative;
 }
-h2{font-size:17px;margin:0 0 17px;color:var(--navy)}
-.section-head{
-  display:flex;align-items:center;
-  justify-content:space-between;gap:10px;
+
+.header-inner, .container {
+  max-width: 680px;
+  margin: 0 auto;
 }
-.section-head h2{margin-bottom:0}
-label{
-  display:block;font-size:13px;font-weight:bold;
-  margin:13px 0 6px;color:#536a7d;
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  color: var(--primary);
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
-input,select,textarea{
-  width:100%;padding:14px;border:1px solid var(--line);
-  border-radius:11px;background:#fbfdfe;
-  color:var(--text);font-size:15px;outline:none;
+
+header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 12px 0 4px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-input:focus,select:focus,textarea:focus{
-  border-color:var(--teal);
-  box-shadow:0 0 0 3px #21a6a015;
+
+header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
 }
-textarea{resize:vertical;min-height:75px}
-button{
-  border:0;border-radius:11px;padding:14px;
-  font-size:15px;font-weight:bold;cursor:pointer;
+
+.hero-date {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.primary{
-  background:linear-gradient(135deg,var(--teal),#168c91);
-  color:white;width:100%;margin-top:18px;
+
+.container {
+  padding: 0 16px;
 }
-.secondary{background:#eaf3f5;color:var(--blue);width:100%}
-.danger{background:#fff0ef;color:#b64b46;padding:9px 12px}
-.stats{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-  margin-top:14px;
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.stat{
-  background:#f3f7fa;border:1px solid #e8eef2;
-  border-radius:14px;padding:16px;min-width:0;
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
-.stat span{font-size:12px;color:var(--muted);line-height:1.4}
-.stat strong{
-  display:block;font-size:21px;color:var(--navy);
-  margin-top:9px;overflow-wrap:anywhere;
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.stat.accent{background:#e9f7f5;border-color:#d8efeb}
-.stat.accent strong{color:#168b82}
-.small{font-size:12px;color:var(--muted);line-height:1.6}
-.pill{
-  display:inline-block;background:#e8f5f3;color:#168b82;
-  border-radius:20px;padding:6px 10px;font-size:11px;
+
+.form-group {
+  margin-bottom: 16px;
 }
-.chart-wrap{
-  display:flex;align-items:flex-end;gap:9px;
-  height:165px;padding:15px 4px 0;
-  border-bottom:1px solid var(--line);
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 8px;
 }
-.chart-col{
-  flex:1;display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-end;
-  height:100%;gap:7px;min-width:0;
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--input-border);
+  border-radius: 14px;
+  background: var(--input-bg);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: all 0.2s ease;
 }
-.chart-bar{
-  width:100%;max-width:34px;min-height:3px;
-  border-radius:7px 7px 2px 2px;
-  background:linear-gradient(180deg,#35c4b5,#176b82);
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+  background: rgba(15, 23, 42, 0.85);
 }
-.chart-label{font-size:10px;color:var(--muted)}
-.chart-value{font-size:9px;color:var(--muted);white-space:nowrap}
-.record{border-bottom:1px solid var(--line);padding:15px 0}
-.record:last-child{border:0}
-.record-top{display:flex;justify-content:space-between;gap:10px}
-.record-name{font-weight:bold;color:var(--navy)}
-.record-amount{font-weight:bold;color:#168b82;white-space:nowrap}
-.record-info{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
-.record-actions{display:flex;justify-content:flex-end;margin-top:8px}
-.empty{text-align:center;padding:20px;color:var(--muted);font-size:14px}
-.hidden{display:none}
-.quick-fab{
-  position:fixed;right:20px;bottom:83px;z-index:10;
-  border-radius:50%;width:58px;height:58px;padding:0;
-  background:var(--teal);color:white;font-size:29px;
-  box-shadow:0 8px 22px #102b4640;
+
+select option {
+  background: #1e293b;
+  color: #fff;
 }
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:9;
-  background:white;border-top:1px solid var(--line);
-  display:flex;justify-content:space-around;
-  padding:10px 8px calc(10px + env(safe-area-inset-bottom));
-  box-shadow:0 -5px 18px #102b460d;
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
 }
-.bottom-nav a{
-  color:#718496;text-decoration:none;font-size:11px;
-  text-align:center;display:flex;flex-direction:column;
-  gap:4px;align-items:center;min-width:65px;
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
-.bottom-nav b{font-size:20px;color:var(--navy);line-height:1}
-.bottom-nav a.active{color:var(--teal);font-weight:bold}
-@media(max-width:390px){
-  .stat strong{font-size:18px}
-  header h1{font-size:25px}
-  .quick-fab{right:15px;bottom:78px}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  width: 100%;
+  margin-top: 10px;
+  color: #0f172a;
+  background: var(--primary-gradient);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+  box-shadow: 0 10px 28px rgba(6, 182, 212, 0.4);
+}
+
+.btn-secondary {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat-box {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.stat-box.highlight {
+  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.25);
+}
+
+.stat-box span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.stat-box strong {
+  display: block;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.stat-box.highlight strong {
+  color: var(--primary);
+}
+
+.search-box {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.search-box input {
+  padding-left: 42px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.record-item {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.record-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.record-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.record-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+}
+
+.record-money {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.record-info {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  background: rgba(6, 182, 212, 0.12);
+  color: var(--primary);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.btn-delete {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.btn-delete:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.small-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.empty-icon {
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Yüzen Mobil Alt Navigasyon Barı */
+.bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 500px;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.bottom-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.bottom-nav a.active {
+  color: #fff;
+  background: var(--primary-gradient);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.bottom-nav svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.2;
+}
+
+/* Toast Bildirimi */
+#toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid var(--primary);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+@media(max-width: 400px) {
+  .stats-grid { gap: 8px; }
+  .stat-box { padding: 12px 6px; }
+  .stat-box strong { font-size: 14px; }
+  .stat-box span { font-size: 10px; }
 }
 </style>
 </head>
 <body>
 
+<!-- Toast Mesaj Bildirimi -->
+<div id="toast">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span id="toastMsg">İşlem Başarılı</span>
+</div>
+
 <header>
   <div class="header-inner">
-    <div class="logo">DENTAL PROFESSIONAL</div>
-    <div class="hero-row">
-      <div>
-        <h1>Dental Pro</h1>
-        <p>Kazanç takip panelin</p>
-      </div>
-      <div class="hero-date" id="todayLabel"></div>
+    <div class="brand-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Dental Professional
+    </div>
+    <h1>Dental Pro</h1>
+    <p>İşlemlerini profesyonelce kaydet ve kazancını takip et.</p>
+    <div class="hero-date" id="todayLabel">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span>--</span>
     </div>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- İŞLEM EKLEME KARTI -->
+  <section class="card" id="newRecord">
+    <div class="eyebrow">YENİ KAYIT</div>
+    <h2>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      İşlem Ekle
+    </h2>
+
+    <div class="form-group">
+      <label for="date">İşlem Tarihi *</label>
+      <input type="date" id="date">
+    </div>
+
+    <div class="form-group">
+      <label for="patient">Hasta Adı *</label>
+      <input type="text" id="patient" placeholder="Örn. Ahsen Yılmaz">
+    </div>
+
+    <div class="form-group">
+      <label for="tooth">Diş Numarası</label>
+      <input type="text" id="tooth" placeholder="Örn. 16, 21, 46">
+    </div>
+
+    <div class="form-group">
+      <label for="procedure">Yapılan İşlem *</label>
+      <input type="text" id="procedure" placeholder="Örn. Kompozit Dolgu, Kanal Tedavisi">
+    </div>
+
+    <div class="form-group">
+      <label for="doctorType">İşlemi Yapan Doktor *</label>
+      <select id="doctorType" onchange="toggleDoctor()">
+        <option value="self">Ben</option>
+        <option value="other">Diğer Doktor</option>
+      </select>
+    </div>
+
+    <div id="otherDoctorBox" class="form-group hidden">
+      <label for="otherDoctor">Doktor Adı *</label>
+      <input type="text" id="otherDoctor" placeholder="Doktorun adını giriniz">
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Kazanç (€) *</label>
+      <input type="number" id="amount" min="0" step="0.01" placeholder="Örn. 75">
+    </div>
+
+    <div class="form-group">
+      <label for="note">Açıklama (İsteğe bağlı)</label>
+      <textarea id="note" placeholder="Ek klinik notlar veya hatırlatmalar..."></textarea>
+    </div>
+
+    <button class="btn-primary" onclick="addRecord()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      İşlemi Kaydet
+    </button>
+  </section>
+
+  <!-- ÖZET KARTI -->
   <section class="card" id="overview">
-    <h2>Bugünkü özet</h2>
-    <div class="stats" style="margin-top:0">
-      <div class="stat accent">
-        <span>Bugünkü toplam kazanç</span>
-        <strong id="todayTotal">0 €</strong>
+    <div class="eyebrow">FINANSAL DURUM</div>
+    <h2>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+      Genel Durum
+    </h2>
+    <div class="stats-grid">
+      <div class="stat-box highlight">
+        <span>Bugün Toplam</span>
+        <strong id="todayTotal">0,00 €</strong>
       </div>
-      <div class="stat">
-        <span>Bugünkü işlem sayısı</span>
-        <strong id="todayCount">0</strong>
+      <div class="stat-box">
+        <span>Bu Ay Toplam</span>
+        <strong id="currentTotal">0,00 €</strong>
       </div>
-      <div class="stat">
-        <span>Bu ay toplam kazanç</span>
-        <strong id="currentTotal">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Bu ay işlem sayısı</span>
+      <div class="stat-box">
+        <span>Bu Ay Adet</span>
         <strong id="currentCount">0</strong>
       </div>
     </div>
   </section>
 
-  <section class="card">
-    <div class="section-head">
-      <h2>Kazanç grafiği</h2>
-      <span class="pill">Son 7 gün</span>
-    </div>
-    <div id="earningsChart" class="chart-wrap"></div>
-  </section>
-
-  <section class="card" id="newRecord">
-    <div class="section-head">
-      <h2>＋ Yeni işlem</h2>
-      <span class="pill">Hızlı kayıt</span>
-    </div>
-
-    <label for="date">İşlem tarihi *</label>
-    <input type="date" id="date">
-
-    <label for="patient">Hasta adı *</label>
-    <input type="text" id="patient" placeholder="Hasta adı">
-
-    <label for="tooth">Diş numarası</label>
-    <input type="text" id="tooth" placeholder="Örn. 16">
-
-    <label for="procedure">Yapılan işlem *</label>
-    <input type="text" id="procedure" placeholder="Örn. Dolgu, kanal tedavisi">
-
-    <label for="doctorType">İşlemi yapan doktor *</label>
-    <select id="doctorType" onchange="toggleDoctor()">
-      <option value="self">Ben yaptım</option>
-      <option value="other">Diğer doktor yaptı</option>
-    </select>
-
-    <div id="otherDoctorBox" class="hidden">
-      <label for="otherDoctor">Doktor adı *</label>
-      <input type="text" id="otherDoctor" placeholder="Doktor adı">
-    </div>
-
-    <label for="amount">Kazanç (€) *</label>
-    <input type="number" id="amount" min="0" step="0.01" placeholder="Örn. 50">
-
-    <label for="note">Ek bilgi</label>
-    <textarea id="note" placeholder="İşlemle ilgili ek notlar..."></textarea>
-
-    <button class="primary" onclick="addRecord()">İşlemi Kaydet</button>
-  </section>
-
+  <!-- AYLIK RAPOR -->
   <section class="card" id="monthlyReport">
-    <h2>Aylık rapor</h2>
-    <label for="month">Raporlanacak ay</label>
-    <input type="month" id="month" onchange="render()">
-    <div class="stats">
-      <div class="stat accent">
-        <span>Toplam kazanç</span>
-        <strong id="reportTotal">0 €</strong>
+    <div class="eyebrow">RAPORLAR</div>
+    <h2>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Aylık Rapor
+    </h2>
+    <div class="form-group">
+      <label for="month">Raporlanacak Ay</label>
+      <input type="month" id="month" onchange="render()">
+    </div>
+    <div class="stats-grid" style="margin-top:16px">
+      <div class="stat-box highlight">
+        <span>Seçilen Ay Toplamı</span>
+        <strong id="reportTotal">0,00 €</strong>
       </div>
-      <div class="stat">
-        <span>Toplam işlem</span>
+      <div class="stat-box">
+        <span>İşlem Adedi</span>
         <strong id="reportCount">0</strong>
       </div>
+      <div class="stat-box">
+        <span>Ort. İşlem Kazancı</span>
+        <strong id="reportAvg">0,00 €</strong>
+      </div>
     </div>
   </section>
 
+  <!-- İŞLEM GEÇMİŞİ VE ARAMA -->
   <section class="card" id="recordsSection">
-    <h2>İşlem geçmişi</h2>
+    <div class="eyebrow">GEÇMİŞ GEZİNTİSİ</div>
+    <h2>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      İşlem Geçmişi
+    </h2>
+
+    <div class="search-box">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Hasta adı, diş no veya işlem ara..." oninput="render()">
+    </div>
+
     <div id="records"></div>
   </section>
 
+  <!-- YEDEKLEME VE VERİ YÖNETİMİ -->
   <section class="card">
-    <h2>Veri yedekleme</h2>
-    <p class="small">Kayıtlarını telefonuna JSON dosyası olarak indir. Telefon veya tarayıcı değiştirirsen bu dosyayı kullanarak geri yükleyebilirsin.</p>
-    <button class="secondary" onclick="backup()">Yedeği indir</button>
-    <label for="restoreFile">Yedek dosyasını seç</label>
-    <input type="file" id="restoreFile" accept=".json,application/json">
-    <button class="secondary" style="margin-top:10px" onclick="restore()">Yedeği geri yükle</button>
+    <div class="eyebrow">VERİ YÖNETİMİ</div>
+    <h2>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Yedekleme ve Dışa Aktar
+    </h2>
+    <p class="small-text">Verilerinizi güvende tutmak için bilgisayarınıza veya telefonunuza yedekleyin.</p>
+    
+    <button class="btn-secondary" onclick="backup()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      JSON Yedek Dosyasını İndir
+    </button>
+
+    <button class="btn-secondary" onclick="exportExcel()" style="margin-top:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Excel / CSV Olarak Aktar
+    </button>
+
+    <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
+      <label for="restoreFile">Yedek Dosyası Yükle</label>
+      <input type="file" id="restoreFile" accept=".json,application/json">
+      <button class="btn-secondary" onclick="restore()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Yedeği Geri Yükle
+      </button>
+    </div>
   </section>
 
-  <p class="small">
-    Veriler bu tarayıcıda saklanır. Düzenli yedek al.
-    Hasta bilgileri hassas olduğundan gerçek hasta verilerini
-    kaydetmeden önce kurumunun veri güvenliği ve gizlilik
-    kurallarını dikkate al.
+  <p class="small-text" style="text-align: center; padding: 0 10px; margin-top: 20px;">
+    Tüm veriler yerel cihazınızın tarayıcısında saklanır. Hassas verileriniz üçüncü taraf sunuculara aktarılmaz. Düzenli olarak yedek almanız önerilir.
   </p>
 </main>
 
-<button class="quick-fab" aria-label="Hızlı işlem ekle"
-onclick="document.getElementById('newRecord').scrollIntoView({behavior:'smooth'})">＋</button>
-
+<!-- YÜZEN MOBİL NAVİGASYON -->
 <nav class="bottom-nav">
-  <a class="active" href="#overview"><b>⌂</b>Özet</a>
-  <a href="#newRecord"><b>＋</b>İşlem ekle</a>
-  <a href="#monthlyReport"><b>▤</b>Raporlar</a>
-  <a href="#recordsSection"><b>◷</b>Geçmiş</a>
+  <a class="active" href="#newRecord" onclick="setActiveNav(this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    Ekle
+  </a>
+  <a href="#overview" onclick="setActiveNav(this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Özet
+  </a>
+  <a href="#monthlyReport" onclick="setActiveNav(this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Raporlar
+  </a>
+  <a href="#recordsSection" onclick="setActiveNav(this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Geçmiş
+  </a>
 </nav>
 
 <script>
 let data = [];
 
+// LocalStorage yüklemesi
 try {
   const saved = JSON.parse(localStorage.getItem("dentalProRecords") || "[]");
   if (Array.isArray(saved)) data = saved;
 } catch(e) {
   data = [];
+}
+
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+function setActiveNav(el) {
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
 }
 
 function localDate(d) {
@@ -300,8 +690,8 @@ document.getElementById("month").value = localDate(now).slice(0,7);
 
 function euro(value) {
   return Number(value || 0).toLocaleString("de-DE", {
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }) + " €";
 }
 
@@ -326,218 +716,17 @@ function addRecord() {
   const amount = Number(amountText);
   const note = document.getElementById("note").value.trim();
 
-  if (!date || !patient || !procedure || amountText === "" ||
-      !Number.isFinite(amount) || amount < 0) {
-    alert("Lütfen tarih, hasta adı, işlem ve geçerli kazanç miktarını gir.");
+  if (!date || !patient || !procedure || amountText === "" || !Number.isFinite(amount) || amount < 0) {
+    showToast("Lütfen tüm zorunlu (*) alanları doğru şekilde doldurun.");
     return;
   }
 
   if (doctorType === "other" && !doctorName) {
-    alert("Diğer doktorun adını gir.");
+    showToast("Lütfen diğer doktorun adını giriniz.");
     return;
   }
 
   data.push({
     id: Date.now().toString() + Math.random().toString(16).slice(2),
     date, patient, tooth, procedure, doctorType,
-    doctorName: doctorType === "other" ? doctorName : "",
-    amount, note
-  });
-
-  persist();
-
-  document.getElementById("patient").value = "";
-  document.getElementById("tooth").value = "";
-  document.getElementById("procedure").value = "";
-  document.getElementById("amount").value = "";
-  document.getElementById("note").value = "";
-  document.getElementById("otherDoctor").value = "";
-  document.getElementById("doctorType").value = "self";
-  toggleDoctor();
-
-  alert("İşlem başarıyla kaydedildi.");
-}
-
-function removeRecord(id) {
-  if (!confirm("Bu işlem kaydını silmek istediğine emin misin?")) return;
-  data = data.filter(x => x.id !== id);
-  persist();
-}
-
-function sum(arr) {
-  return arr.reduce((total,x) => total + Number(x.amount || 0), 0);
-}
-
-function render() {
-  const currentMonth = localDate(new Date()).slice(0,7);
-  const selectedMonth = document.getElementById("month").value;
-  const current = data.filter(x => x.date && x.date.startsWith(currentMonth));
-  const monthly = data.filter(x => x.date && x.date.startsWith(selectedMonth));
-
-  const today = localDate(new Date());
-  const todayRecords = data.filter(x => x.date === today);
-
-  document.getElementById("todayLabel").textContent =
-    new Date().toLocaleDateString("tr-TR",{day:"numeric",month:"short"});
-  document.getElementById("todayTotal").textContent = euro(sum(todayRecords));
-  document.getElementById("todayCount").textContent = todayRecords.length;
-  document.getElementById("currentTotal").textContent = euro(sum(current));
-  document.getElementById("currentCount").textContent = current.length;
-  document.getElementById("reportTotal").textContent = euro(sum(monthly));
-  document.getElementById("reportCount").textContent = monthly.length;
-
-  // Son 7 günün kazanç grafiği
-  const chart = document.getElementById("earningsChart");
-  chart.innerHTML = "";
-  const days = [];
-
-  for (let i=6;i>=0;i--) {
-    const d = new Date();
-    d.setDate(d.getDate()-i);
-    const key = localDate(d);
-    const total = sum(data.filter(x => x.date === key));
-    days.push({
-      key,
-      label:d.toLocaleDateString("tr-TR",{weekday:"short"}),
-      total
-    });
-  }
-
-  const maxValue = Math.max(1,...days.map(d=>d.total));
-
-  days.forEach(d => {
-    const col = document.createElement("div");
-    col.className = "chart-col";
-
-    const value = document.createElement("span");
-    value.className = "chart-value";
-    value.textContent = d.total ? Math.round(d.total) + " €" : "–";
-
-    const bar = document.createElement("div");
-    bar.className = "chart-bar";
-    bar.style.height = Math.max(3,(d.total/maxValue)*100) + "px";
-    bar.title = d.key + ": " + euro(d.total);
-
-    const label = document.createElement("span");
-    label.className = "chart-label";
-    label.textContent = d.label;
-
-    col.append(value,bar,label);
-    chart.appendChild(col);
-  });
-
-  // Seçilen aya ait kayıtlar
-  const list = document.getElementById("records");
-  list.innerHTML = "";
-
-  const sorted = [...monthly].sort((a,b) => b.date.localeCompare(a.date));
-
-  if (!sorted.length) {
-    list.innerHTML = '<div class="empty">Bu ay henüz işlem kaydı bulunmuyor.</div>';
-    return;
-  }
-
-  sorted.forEach(x => {
-    const record = document.createElement("div");
-    record.className = "record";
-
-    const top = document.createElement("div");
-    top.className = "record-top";
-
-    const name = document.createElement("div");
-    name.className = "record-name";
-    name.textContent = x.patient || "İsimsiz kayıt";
-
-    const amount = document.createElement("div");
-    amount.className = "record-amount";
-    amount.textContent = euro(x.amount);
-
-    top.append(name,amount);
-
-    const info = document.createElement("div");
-    info.className = "record-info";
-    info.textContent =
-      x.date + " • " + (x.tooth ? "Diş: " + x.tooth + " • " : "") +
-      (x.procedure || "");
-
-    const doctor = document.createElement("div");
-    doctor.className = "pill";
-    doctor.textContent = x.doctorType === "other"
-      ? "Doktor: " + (x.doctorName || "Diğer doktor")
-      : "Kendi işlemim";
-
-    record.append(top,info,doctor);
-
-    if (x.note) {
-      const note = document.createElement("div");
-      note.className = "record-info";
-      note.textContent = "Ek bilgi: " + x.note;
-      record.appendChild(note);
-    }
-
-    const actions = document.createElement("div");
-    actions.className = "record-actions";
-
-    const del = document.createElement("button");
-    del.className = "danger";
-    del.textContent = "Kaydı sil";
-    del.onclick = () => removeRecord(x.id);
-
-    actions.appendChild(del);
-    record.appendChild(actions);
-    list.appendChild(record);
-  });
-}
-
-function backup() {
-  const blob = new Blob([JSON.stringify(data,null,2)], {
-    type:"application/json"
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "dental-pro-yedek.json";
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url),1000);
-}
-
-function restore() {
-  const file = document.getElementById("restoreFile").files[0];
-
-  if (!file) {
-    alert("Önce yedek dosyasını seç.");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function() {
-    try {
-      const imported = JSON.parse(reader.result);
-
-      if (!Array.isArray(imported) || !imported.every(x =>
-        x && typeof x.date === "string" &&
-        typeof x.patient === "string" &&
-        typeof x.procedure === "string" &&
-        Number.isFinite(Number(x.amount))
-      )) {
-        throw new Error("Invalid backup");
-      }
-
-      if (!confirm("Mevcut kayıtların yerine yedek dosyasındaki kayıtlar yüklenecek. Devam edilsin mi?")) return;
-
-      data = imported;
-      persist();
-      alert("Yedek başarıyla geri yüklendi.");
-    } catch(e) {
-      alert("Dosya okunamadı veya yedek geçersiz.");
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-render();
-</script>
-</body>
-</html>
+    
