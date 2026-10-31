@@ -1,1 +1,230 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diş Hekimi Kazanç Takibi</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:18px;background:#f2f5f8;font-family:Arial,sans-serif;color:#243247}
+.container{max-width:650px;margin:auto}
+h1{font-size:25px;color:#176b70}
+.card{background:white;padding:17px;border-radius:14px;margin:14px 0;box-shadow:0 2px 9px #0000000c}
+input,button{width:100%;padding:13px;margin:6px 0;border:1px solid #d8e0e7;border-radius:9px;font-size:16px}
+button{background:#176b70;color:white;border:0;font-weight:bold;cursor:pointer}
+button.secondary{background:#e8eff1;color:#176b70}
+button.danger{background:#b94141;width:auto;padding:9px 13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#e8f3f2;padding:14px;border-radius:10px}
+.stat strong{display:block;font-size:21px;margin-top:8px}
+.item{border-bottom:1px solid #eee;padding:12px 0}
+.item:last-child{border:0}
+.small{font-size:13px;color:#697887}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🦷 Diş Kazanç Takibi</h1>
+
+<div class="card">
+<h3>Yeni işlem ekle</h3>
+<label>Tarih</label>
+<input type="date" id="date">
+<label>Yapılan işlem</label>
+<input id="procedure" placeholder="Örn: Dolgu, kanal, çekim">
+<label>Diş numarası (isteğe bağlı)</label>
+<input id="tooth" placeholder="Örn: 16">
+<label>Kazanç (TL)</label>
+<input type="number" id="amount" placeholder="Kazanç miktarı" min="0" step="0.01">
+<label>Not (isteğe bağlı)</label>
+<input id="note" placeholder="İşlem notu">
+<button onclick="addRecord()">İşlemi Kaydet</button>
+</div>
+
+<div class="card">
+<h3>Bu ay</h3>
+<div class="stats">
+<div class="stat">Toplam kazanç<strong id="total">0 TL</strong></div>
+<div class="stat">İşlem sayısı<strong id="count">0</strong></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Aylık rapor</h3>
+<input type="month" id="month" onchange="render()">
+<div class="stats">
+<div class="stat">Kazanç<strong id="monthTotal">0 TL</strong></div>
+<div class="stat">İşlem<strong id="monthCount">0</strong></div>
+</div>
+</div>
+
+<div class="card">
+<h3>İşlem geçmişi</h3>
+<div id="records"></div>
+</div>
+
+<div class="card">
+<h3>Veri yedekleme</h3>
+<p class="small">Kayıtlarını telefonuna yedekleyebilir, daha sonra geri yükleyebilirsin.</p>
+<button class="secondary" onclick="backup()">Yedek indir</button>
+<label class="small">Yedek dosyasını seç</label>
+<input type="file" id="restoreFile" accept=".json">
+<button class="secondary" onclick="restore()">Yedeği geri yükle</button>
+</div>
+
+<p class="small">Veriler bu tarayıcıda saklanır. Tarayıcı verilerini silersen kayıtların kaybolabilir. Düzenli yedek al. Hasta adı veya kişisel sağlık bilgisi kaydetme.</p>
+</div>
+
+<script>
+let data = [];
+try {
+  data = JSON.parse(localStorage.getItem("disKayitlari") || "[]");
+  if (!Array.isArray(data)) data = [];
+} catch(e) {
+  data = [];
+}
+
+const today = new Date();
+const dateInput = document.getElementById("date");
+const monthInput = document.getElementById("month");
+
+function dateString(d) {
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+
+dateInput.value = dateString(today);
+monthInput.value = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0");
+
+function money(value) {
+  return Number(value).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL";
+}
+
+function save() {
+  localStorage.setItem("disKayitlari",JSON.stringify(data));
+  render();
+}
+
+function addRecord() {
+  const date = dateInput.value;
+  const procedure = document.getElementById("procedure").value.trim();
+  const amount = Number(document.getElementById("amount").value);
+
+  if (!date || !procedure || document.getElementById("amount").value === "" || !Number.isFinite(amount) || amount < 0) {
+    alert("Lütfen tarih, işlem ve geçerli kazanç miktarını gir.");
+    return;
+  }
+
+  data.push({
+    id: Date.now().toString()+"-"+Math.random().toString(16).slice(2),
+    date,
+    procedure,
+    tooth: document.getElementById("tooth").value.trim(),
+    amount,
+    note: document.getElementById("note").value.trim()
+  });
+
+  document.getElementById("procedure").value = "";
+  document.getElementById("tooth").value = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("note").value = "";
+
+  save();
+  alert("İşlem kaydedildi.");
+}
+
+function deleteRecord(id) {
+  if (!confirm("Bu işlemi silmek istediğine emin misin?")) return;
+  data = data.filter(x => x.id !== id);
+  save();
+}
+
+function render() {
+  const selectedMonth = monthInput.value;
+  const monthly = data.filter(x => x.date && x.date.startsWith(selectedMonth));
+  const currentMonth = dateString(today).slice(0,7);
+  const current = data.filter(x => x.date && x.date.startsWith(currentMonth));
+
+  const sum = arr => arr.reduce((total,x) => total + Number(x.amount || 0),0);
+
+  document.getElementById("total").textContent = money(sum(current));
+  document.getElementById("count").textContent = current.length;
+  document.getElementById("monthTotal").textContent = money(sum(monthly));
+  document.getElementById("monthCount").textContent = monthly.length;
+
+  const list = document.getElementById("records");
+  list.innerHTML = "";
+
+  const sorted = [...monthly].sort((a,b) => b.date.localeCompare(a.date));
+
+  if (!sorted.length) {
+    list.textContent = "Bu ay henüz kayıt yok.";
+    return;
+  }
+
+  sorted.forEach(x => {
+    const item = document.createElement("div");
+    item.className = "item";
+
+    const info = document.createElement("div");
+    info.textContent = x.date+" • "+x.procedure+
+      (x.tooth ? " • Diş: "+x.tooth : "");
+
+    const detail = document.createElement("div");
+    detail.className = "small";
+    detail.textContent = money(x.amount)+(x.note ? " • "+x.note : "");
+
+    const del = document.createElement("button");
+    del.className = "danger";
+    del.textContent = "Sil";
+    del.onclick = () => deleteRecord(x.id);
+
+    item.append(info,detail,del);
+    list.appendChild(item);
+  });
+}
+
+function backup() {
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dis-kazanc-yedek.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function restore() {
+  const file = document.getElementById("restoreFile").files[0];
+  if (!file) {
+    alert("Önce yedek dosyasını seç.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function() {
+    try {
+      const imported = JSON.parse(reader.result);
+      if (!Array.isArray(imported) || !imported.every(x =>
+        x && typeof x.date === "string" &&
+        typeof x.procedure === "string" &&
+        Number.isFinite(Number(x.amount))
+      )) {
+        throw new Error("Geçersiz yedek");
+      }
+
+      if (!confirm("Mevcut kayıtların yerine yedek dosyasındaki kayıtlar yüklenecek. Devam edilsin mi?")) return;
+      data = imported;
+      save();
+      alert("Yedek başarıyla yüklendi.");
+    } catch(e) {
+      alert("Dosya okunamadı veya yedek geçersiz.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+render();
+</script>
+</body>
+</html>
