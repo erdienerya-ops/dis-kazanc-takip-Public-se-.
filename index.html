@@ -1,614 +1,568 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0f172a">
-  <title>Dental Pro | Endodonti Kazanç Takibi</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --card-border: #334155;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #0d9488;
-      --accent-hover: #14b8a6;
-      --accent-light: rgba(13, 148, 136, 0.15);
-      --danger: #ef4444;
-      --input-bg: #0f172a;
-      --radius: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      padding: 12px;
-      padding-bottom: 40px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .app-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 4px 16px 4px;
-      border-bottom: 1px solid var(--card-border);
-      margin-bottom: 16px;
-    }
-
-    .app-header h1 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: -0.5px;
-    }
-
-    .badge-endo {
-      background: var(--accent-light);
-      color: var(--accent-hover);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 20px;
-      border: 1px solid rgba(20, 184, 166, 0.3);
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    }
-
-    .form-group {
-      margin-bottom: 12px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--accent);
-    }
-
-    .quick-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .tag-btn {
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .tag-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .btn-submit:active {
-      background: var(--accent-hover);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .stat-box {
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      padding: 12px;
-      border-radius: 8px;
-    }
-
-    .stat-box span {
-      display: block;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .stat-box strong {
-      font-size: 18px;
-      color: var(--text-main);
-    }
-
-    .stat-box.highlight strong {
-      color: var(--accent-hover);
-    }
-
-    .record-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .record-item:last-child {
-      border-bottom: none;
-    }
-
-    .record-info h4 {
-      font-size: 15px;
-      color: var(--text-main);
-      margin-bottom: 2px;
-    }
-
-    .record-info p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .record-right {
-      text-align: right;
-    }
-
-    .record-amount {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--accent-hover);
-      margin-bottom: 4px;
-    }
-
-    .btn-del {
-      background: transparent;
-      border: none;
-      color: var(--danger);
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 20px;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    .tab-container {
-      display: flex;
-      background: var(--input-bg);
-      border-radius: 8px;
-      padding: 3px;
-      margin-bottom: 12px;
-      border: 1px solid var(--card-border);
-    }
-
-    .tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .tab-btn.active {
-      background: var(--card-bg);
-      color: var(--text-main);
-    }
-
-    .backup-btns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn-sec {
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1422">
+<title>Dental Pro</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{
+--bg:#0b1422;--card:#142338;--line:#263b52;
+--text:#f3f7fb;--muted:#91a5ba;--teal:#35d0bd;
+--red:#ff7474;--gold:#f3c978;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:radial-gradient(ellipse at 50% -15%,#1b3a50,#0b1422 48%);color:var(--text);padding:0 14px 40px}
+.app{max-width:720px;margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:24px 2px 18px}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(145deg,#43ddc8,#138c88);display:grid;place-items:center;color:#062b2a;font-size:23px;font-weight:bold}
+.brand h1{font-size:20px}
+.brand p{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px}
+.pill{font-size:11px;color:var(--teal);border:1px solid #2a776f;background:#12312f;padding:8px 11px;border-radius:99px}
+.hero{background:linear-gradient(125deg,#17364a,#14283c,#123b3a);border:1px solid #285064;border-radius:24px;padding:20px;margin-bottom:15px}
+.hero-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#c4d8e3}
+.hero input{width:140px;background:#0c2130;color:white;border:1px solid #355365;padding:7px;border-radius:9px}
+.hero-total{font-size:36px;font-weight:850;margin:16px 0 5px}
+.hero-foot{font-size:12px;color:#a9c4d1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
+.stat{background:#111f31;border:1px solid var(--line);border-radius:16px;padding:13px 10px}
+.stat span{font-size:10px;color:var(--muted);display:block;margin-bottom:7px}
+.stat strong{font-size:15px;display:block;overflow-wrap:anywhere}
+.stat small{font-size:10px;color:var(--muted);display:block;margin-top:4px}
+.card{background:linear-gradient(160deg,#142338,#101d2d);border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:15px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px}
+.section-head h3{font-size:16px}
+.section-head p{font-size:11px;color:var(--muted);margin-top:5px}
+label{display:block;color:#a9bbcd;font-size:11px;font-weight:bold;margin-bottom:7px}
+input,select,textarea{width:100%;background:#0b1726;border:1px solid #2a4057;color:white;padding:12px;border-radius:11px;font-size:14px;outline:none;min-width:0}
+input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+.field{margin-bottom:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tooth-head{display:flex;justify-content:space-between;align-items:center;margin:15px 0 10px;font-size:13px}
+.count{font-size:10px;color:var(--teal);background:#123a39;padding:6px 9px;border-radius:20px}
+.tooth-row{background:#0c1928;border:1px solid #263b50;border-radius:14px;padding:12px;margin-bottom:9px}
+.tooth-row-top{display:flex;justify-content:space-between;margin-bottom:10px}
+.tooth-label{font-size:11px;color:var(--teal);font-weight:bold}
+.remove{border:0;background:none;color:var(--red);font-size:12px}
+.tooth-fields{display:grid;grid-template-columns:.7fr 1.4fr 1fr;gap:8px}
+.tooth-fields label{font-size:10px}
+.tooth-fields input,.tooth-fields select{padding:10px 7px;font-size:12px}
+.add-btn{width:100%;padding:12px;border-radius:11px;background:#123331;border:1px dashed #258e83;color:#5ce0cf;font-size:12px;margin:3px 0 15px}
+.primary{width:100%;padding:15px;border:0;border-radius:13px;background:linear-gradient(100deg,#26b9a9,#168e87);color:#052b2a;font-size:14px;font-weight:bold}
+.note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px}
+.tabs{display:flex;gap:5px;background:#0b1726;padding:4px;border-radius:12px;border:1px solid var(--line);margin-bottom:13px}
+.tab{flex:1;padding:10px 6px;background:transparent;color:var(--muted);border:0;border-radius:9px;font-size:12px;font-weight:bold}
+.tab.active{background:#20364b;color:white}
+.record{padding:13px 0;border-bottom:1px solid var(--line)}
+.record:last-child{border:0}
+.record-top{display:flex;justify-content:space-between;gap:10px}
+.patient{font-weight:bold;font-size:14px}
+.meta{font-size:10px;color:var(--muted);margin-top:5px}
+.sum{font-size:15px;color:var(--teal);font-weight:bold;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{font-size:10px;color:#c2d7e4;background:#1a3045;border:1px solid #2c465e;padding:6px 8px;border-radius:8px}
+.actions{text-align:right;margin-top:8px}
+.delete{background:none;border:0;color:#ff8585;font-size:11px;padding:5px}
+.empty{text-align:center;padding:25px 10px;color:var(--muted);font-size:12px;line-height:1.7}
+.chart-wrap{height:220px}
+.backup{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.backup button{padding:12px;border:1px solid var(--line);background:#0d1a29;color:#d8e5ef;border-radius:11px;font-size:11px;font-weight:bold}
+.hidden{display:none!important}
+.footer{text-align:center;color:#526a80;font-size:10px;padding:8px}
+@media(max-width:390px){
+.stats{gap:6px}.stat{padding:11px 7px}.stat strong{font-size:12px}
+.hero-total{font-size:31px}.tooth-fields{grid-template-columns:.65fr 1.3fr 1fr}
+.tooth-fields input,.tooth-fields select{font-size:11px;padding:9px 5px}
+}
+</style>
 </head>
 <body>
+<div class="app">
 
-  <header class="app-header">
-    <h1>Dental Pro</h1>
-    <span class="badge-endo">Endodonti Uzmanlık</span>
-  </header>
+<header>
+<div class="brand">
+<div class="logo">✦</div>
+<div><h1>Dental Pro</h1><p>PERSONAL EARNINGS TRACKER</p></div>
+</div>
+<span class="pill">€ EURO</span>
+</header>
 
-  <!-- FORM KARTI -->
-  <main>
-    <section class="card">
-      <form id="recordForm" onsubmit="saveRecord(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="date">Tarih</label>
-            <input type="date" id="date" required>
-          </div>
-          <div class="form-group">
-            <label for="tooth">Diş No</label>
-            <input type="text" id="tooth" placeholder="Örn: 16" pattern="[0-9]*">
-          </div>
-        </div>
+<section class="hero">
+<div class="hero-top">
+<span id="heroTitle">Bu ay kazancın</span>
+<input type="month" id="reportMonth">
+</div>
+<div class="hero-total" id="statTotal">€0,00</div>
+<div class="hero-foot" id="heroFoot">Henüz kayıt bulunmuyor</div>
+</section>
 
-        <div class="form-group">
-          <label for="patient">Hasta Adı Soyadı</label>
-          <input type="text" id="patient" placeholder="Hasta Adı" required>
-        </div>
+<section class="stats">
+<div class="stat"><span>BUGÜN</span><strong id="statToday">€0,00</strong><small>Günlük kazanç</small></div>
+<div class="stat"><span>İŞLEM</span><strong id="statCount">0</strong><small>Bu ay</small></div>
+<div class="stat"><span>KENDİ KAZANCIN</span><strong id="statSelf">€0,00</strong><small>Bu ay</small></div>
+</section>
 
-        <div class="form-group">
-          <label>Hızlı İşlem Seçimi (Endodonti)</label>
-          <div class="quick-tags" id="procedureTags">
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Kanal Tedavisi (KT)')">KT</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Kanal Yenileme (Re-Tx)')">Re-Tx</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Post-Core')">Post-Core</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'MTA / Apeks')">MTA</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Kesik / Pansuman')">Kesik</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Daimi Dolgu')">Dolgu</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Kırık Eğe Çıkarma')">Eğe Çıkarma</button>
-            <button type="button" class="tag-btn" onclick="selectTag(this, 'Acil / Konsültasyon')">Acil</button>
-          </div>
-          <input type="hidden" id="procedure" required>
-        </div>
+<section class="card">
+<div class="section-head">
+<div><h3>Yeni hasta kaydı</h3><p>Bir hastaya istediğin kadar diş ekle</p></div>
+<span class="count" id="toothCount">1 DİŞ</span>
+</div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="doctorType">Uygulayan</label>
-            <select id="doctorType" onchange="toggleDoctorInput()">
-              <option value="self">Ben Yaptım</option>
-              <option value="other">Diğer Doktor</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="amount">Kazanç (€)</label>
-            <input type="number" id="amount" step="0.01" min="0" placeholder="0.00" required>
-          </div>
-        </div>
+<form id="recordForm">
+<div class="grid2">
+<div class="field">
+<label>TARİH</label>
+<input type="date" id="date" required>
+</div>
+<div class="field">
+<label>UYGULAYAN</label>
+<select id="doctorType">
+<option value="self">Ben yaptım</option>
+<option value="other">Diğer doktor</option>
+</select>
+</div>
+</div>
 
-        <div class="form-group hidden" id="otherDoctorGroup">
-          <label for="otherDoctor">Doktor Adı</label>
-          <input type="text" id="otherDoctor" placeholder="Dr. Adı">
-        </div>
+<div class="field">
+<label>HASTA ADI SOYADI</label>
+<input id="patient" placeholder="Hasta adı soyadı" required>
+</div>
 
-        <div class="form-group">
-          <label for="note">Ek Not</label>
-          <textarea id="note" rows="2" placeholder="Kanal sayısı, anatomik notlar vb..."></textarea>
-        </div>
+<div class="field hidden" id="otherDoctorGroup">
+<label>DOKTOR ADI</label>
+<input id="otherDoctor" placeholder="Doktor adı">
+</div>
 
-        <button type="submit" class="btn-submit">KAYDI EKLE</button>
-      </form>
-    </section>
+<div class="tooth-head">
+<strong>🦷 Diş ve işlem detayları</strong>
+<span class="count" id="toothCount2">1 KALEM</span>
+</div>
 
-    <!-- ÖZET VE İSTATİSTİK -->
-    <section class="card">
-      <div class="form-row" style="margin-bottom: 12px;">
-        <div>
-          <label for="reportMonth">Rapor Dönemi</label>
-          <input type="month" id="reportMonth" onchange="renderData()">
-        </div>
-      </div>
+<div id="toothRows"></div>
+<button class="add-btn" type="button" id="addTooth">＋ Başka diş / işlem ekle</button>
 
-      <div class="stats-grid">
-        <div class="stat-box highlight">
-          <span>Aylık Toplam</span>
-          <strong id="statTotal">0 €</strong>
-        </div>
-        <div class="stat-box">
-          <span>İşlem Sayısı</span>
-          <strong id="statCount">0</strong>
-        </div>
-        <div class="stat-box">
-          <span>Kendi Kazancım</span>
-          <strong id="statSelf">0 €</strong>
-        </div>
-        <div class="stat-box">
-          <span>Diğer Doktorlar</span>
-          <strong id="statOther">0 €</strong>
-        </div>
-      </div>
-    </section>
+<div class="grid2">
+<div class="field">
+<label>TOPLAM ÜCRET</label>
+<input id="visitTotal" value="€0,00" readonly>
+</div>
+<div class="field">
+<label>GENEL NOT</label>
+<input id="note" placeholder="Ek açıklama">
+</div>
+</div>
 
-    <!-- KAYIT GEÇMİŞİ -->
-    <section class="card">
-      <div class="tab-container">
-        <button class="tab-btn active" id="tabList" onclick="switchTab('list')">İşlem Listesi</button>
-        <button class="tab-btn" id="tabChart" onclick="switchTab('chart')">Grafik</button>
-      </div>
+<button class="primary" type="submit">KAYDI TAMAMLA ↗</button>
+<p class="note">Her dişin işlem türünü ve ücretini ayrı belirleyebilirsin. Ücretleri istediğin gibi değiştirebilirsin.</p>
+</form>
+</section>
 
-      <div id="listView">
-        <div id="recordList"></div>
-      </div>
+<section class="card">
+<div class="section-head">
+<div><h3>Kazanç geçmişi</h3><p>Seçili aya ait hasta kayıtları</p></div>
+</div>
+<div class="tabs">
+<button class="tab active" id="tabList">Kayıtlar</button>
+<button class="tab" id="tabChart">Kazanç grafiği</button>
+</div>
+<div id="listView"><div id="recordList"></div></div>
+<div id="chartView" class="hidden"><div class="chart-wrap"><canvas id="monthlyChart"></canvas></div></div>
+</section>
 
-      <div id="chartView" class="hidden">
-        <canvas id="monthlyChart" style="max-height: 220px;"></canvas>
-      </div>
-    </section>
+<section class="card">
+<div class="section-head">
+<div><h3>Veri güvenliği</h3><p>Kayıtlarını yedekle veya geri yükle</p></div>
+</div>
+<div class="backup">
+<button type="button" id="exportBtn">↓ YEDEĞİ İNDİR</button>
+<button type="button" id="importBtn">↑ YEDEK YÜKLE</button>
+</div>
+<input type="file" id="fileInput" accept=".json,application/json" class="hidden">
+<p class="note">Verilerin bu cihazda saklanır. Telefon değiştirirken yedek almayı unutma.</p>
+</section>
 
-    <!-- YEDEKLEME -->
-    <section class="card">
-      <label>Veri Yönetimi</label>
-      <div class="backup-btns">
-        <button type="button" class="btn-sec" onclick="exportData()">Yedeği İndir (JSON)</button>
-        <button type="button" class="btn-sec" onclick="document.getElementById('fileInput').click()">Geri Yükle</button>
-      </div>
-      <input type="file" id="fileInput" class="hidden" accept=".json" onchange="importData(event)">
-    </section>
-  </main>
+<div class="footer">DENTAL PRO · KİŞİSEL KAZANÇ TAKİBİ</div>
+</div>
 
-  <script>
-    let db = [];
-    let chartInstance = null;
+<script>
+const DB_KEY='dental_pro_patient_db_v1';
+const procedures=[
+'Kanal Tedavisi (KT)',
+'Kanal Yenileme (Re-Tx)',
+'Post-Core',
+'MTA / Apeks',
+'Kesik / Pansuman',
+'Daimi Dolgu',
+'Kırık Eğe Çıkarma',
+'Acil / Konsültasyon',
+'Diğer'
+];
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const today = new Date().toISOString().split('T')[0];
-      const currentMonth = today.slice(0, 7);
-      
-      document.getElementById('date').value = today;
-      document.getElementById('reportMonth').value = currentMonth;
+let db=[];
+let chart=null;
 
-      loadData();
-      renderData();
-    });
+const $=id=>document.getElementById(id);
 
-    function loadData() {
-      try {
-        const saved = localStorage.getItem("dental_pro_endo_db");
-        db = saved ? JSON.parse(saved) : [];
-      } catch (e) {
-        db = [];
-      }
-    }
+function localDate(){
+const d=new Date();
+return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
 
-    function saveData() {
-      localStorage.setItem("dental_pro_endo_db", JSON.stringify(db));
-      renderData();
-    }
+function money(value){
+return '€'+(Number(value)||0).toLocaleString('de-DE',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+});
+}
 
-    function selectTag(element, value) {
-      document.querySelectorAll('#procedureTags .tag-btn').forEach(btn => btn.classList.remove('active'));
-      element.classList.add('active');
-      document.getElementById('procedure').value = value;
-    }
+function escapeHTML(value){
+return String(value??'').replace(/[&<>"']/g,c=>({
+'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+}
 
-    function toggleDoctorInput() {
-      const type = document.getElementById('doctorType').value;
-      const group = document.getElementById('otherDoctorGroup');
-      group.classList.toggle('hidden', type !== 'other');
-    }
+function loadData(){
+try{
+const saved=JSON.parse(localStorage.getItem(DB_KEY)||'[]');
+db=Array.isArray(saved)?saved:[];
+}catch(e){db=[];}
+}
 
-    function saveRecord(e) {
-      e.preventDefault();
+function saveData(){
+localStorage.setItem(DB_KEY,JSON.stringify(db));
+render();
+}
 
-      const procedure = document.getElementById('procedure').value;
-      if (!procedure) {
-        alert("Lütfen hızlı işlemlerden birini seçin.");
-        return;
-      }
+function addToothRow(data={}){
+const number=$('toothRows').children.length+1;
+const row=document.createElement('div');
+row.className='tooth-row';
 
-      const record = {
-        id: Date.now().toString(),
-        date: document.getElementById('date').value,
-        tooth: document.getElementById('tooth').value.trim(),
-        patient: document.getElementById('patient').value.trim(),
-        procedure: procedure,
-        doctorType: document.getElementById('doctorType').value,
-        otherDoctor: document.getElementById('otherDoctor').value.trim(),
-        amount: parseFloat(document.getElementById('amount').value) || 0,
-        note: document.getElementById('note').value.trim()
-      };
+row.innerHTML=`
+<div class="tooth-row-top">
+<span class="tooth-label">İŞLEM KALEMİ ${number}</span>
+<button type="button" class="remove">Kaldır ✕</button>
+</div>
+<div class="tooth-fields">
+<div>
+<label>DİŞ NO</label>
+<input class="t-number" inputmode="numeric" placeholder="16" value="${escapeHTML(data.tooth||'')}">
+</div>
+<div>
+<label>İŞLEM</label>
+<select class="t-procedure">
+${procedures.map(p=>`<option value="${escapeHTML(p)}" ${data.procedure===p?'selected':''}>${escapeHTML(p)}</option>`).join('')}
+</select>
+</div>
+<div>
+<label>ÜCRET (€)</label>
+<input class="t-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00" value="${data.amount??''}">
+</div>
+</div>`;
 
-      db.push(record);
-      saveData();
+row.querySelector('.remove').addEventListener('click',()=>{
+if($('toothRows').children.length===1){
+row.querySelectorAll('input').forEach(i=>i.value='');
+row.querySelector('select').selectedIndex=0;
+}else{
+row.remove();
+}
+renumber();
+updateTotal();
+});
 
-      document.getElementById('patient').value = '';
-      document.getElementById('tooth').value = '';
-      document.getElementById('amount').value = '';
-      document.getElementById('note').value = '';
-      document.getElementById('procedure').value = '';
-      document.querySelectorAll('#procedureTags .tag-btn').forEach(btn => btn.classList.remove('active'));
-    }
+row.querySelectorAll('input,select').forEach(el=>{
+el.addEventListener('input',updateTotal);
+el.addEventListener('change',updateTotal);
+});
 
-    function deleteRecord(id) {
-      if (confirm("Bu işlemi silmek istediğinize emin misiniz?")) {
-        db = db.filter(item => item.id !== id);
-        saveData();
-      }
-    }
+$('toothRows').appendChild(row);
+renumber();
+updateTotal();
+}
 
-    function renderData() {
-      const selectedMonth = document.getElementById('reportMonth').value;
-      const filtered = db.filter(item => item.date.startsWith(selectedMonth));
+function renumber(){
+[...$('toothRows').children].forEach((row,index)=>{
+row.querySelector('.tooth-label').textContent='İŞLEM KALEMİ '+(index+1);
+});
+const count=$('toothRows').children.length;
+$('toothCount').textContent=count+' DİŞ';
+$('toothCount2').textContent=count+' KALEM';
+}
 
-      let total = 0, selfTotal = 0, otherTotal = 0;
+function getLines(){
+return [...$('toothRows').children].map(row=>({
+tooth:row.querySelector('.t-number').value.trim(),
+procedure:row.querySelector('.t-procedure').value,
+amount:Math.max(0,Number(row.querySelector('.t-amount').value)||0)
+}));
+}
 
-      filtered.forEach(item => {
-        total += item.amount;
-        if (item.doctorType === 'other') {
-          otherTotal += item.amount;
-        } else {
-          selfTotal += item.amount;
-        }
-      });
+function updateTotal(){
+const total=getLines().reduce((sum,line)=>sum+line.amount,0);
+$('visitTotal').value=money(total);
+renumber();
+}
 
-      document.getElementById('statTotal').innerText = total.toLocaleString('de-DE', {minimumFractionDigits: 2}) + ' €';
-      document.getElementById('statCount').innerText = filtered.length;
-      document.getElementById('statSelf').innerText = selfTotal.toLocaleString('de-DE', {minimumFractionDigits: 2}) + ' €';
-      document.getElementById('statOther').innerText = otherTotal.toLocaleString('de-DE', {minimumFractionDigits: 2}) + ' €';
+function toggleDoctor(){
+const other=$('doctorType').value==='other';
+$('otherDoctorGroup').classList.toggle('hidden',!other);
+$('otherDoctor').required=other;
+}
 
-      const listEl = document.getElementById('recordList');
-      listEl.innerHTML = '';
+function saveRecord(event){
+event.preventDefault();
 
-      if (filtered.length === 0) {
-        listEl.innerHTML = '<div class="empty-state">Bu ay için kayıt bulunamadı.</div>';
-      } else {
-        filtered.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(item => {
-          const docInfo = item.doctorType === 'other' ? ` (Dr. ${item.otherDoctor || 'Diğer'})` : '';
-          const toothInfo = item.tooth ? ` | Diş: ${item.tooth}` : '';
-          
-          const html = `
-            <div class="record-item">
-              <div class="record-info">
-                <h4>${item.patient}</h4>
-                <p>${item.procedure}${toothInfo}</p>
-                <p>${item.date}${docInfo}</p>
-              </div>
-              <div class="record-right">
-                <div class="record-amount">${item.amount.toLocaleString('de-DE', {minimumFractionDigits: 2})} €</div>
-                <button class="btn-del" onclick="deleteRecord('${item.id}')">Sil</button>
-              </div>
-            </div>
-          `;
-          listEl.innerHTML += html;
-        });
-      }
+const lines=getLines();
 
-      renderChart(filtered);
-    }
+if(lines.some(line=>!line.tooth||!line.amount||line.amount<0)){
+alert('Her işlem için diş numarası ve sıfırdan büyük ücret gir.');
+return;
+}
 
-    function switchTab(tab) {
-      document.getElementById('tabList').classList.toggle('active', tab === 'list');
-      document.getElementById('tabChart').classList.toggle('active', tab === 'chart');
-      document.getElementById('listView').classList.toggle('hidden', tab !== 'list');
-      document.getElementById('chartView').classList.toggle('hidden', tab !== 'chart');
-    }
+const record={
+id:Date.now().toString()+'-'+Math.random().toString(36).slice(2),
+date:$('date').value,
+patient:$('patient').value.trim(),
+doctorType:$('doctorType').value,
+otherDoctor:$('otherDoctor').value.trim(),
+lines:lines,
+note:$('note').value.trim()
+};
 
-    function renderChart(records) {
-      const ctx = document.getElementById('monthlyChart').getContext('2d');
-      
-      const days = {};
-      records.forEach(r => {
-        const day = r.date.split('-')[2];
-        days[day] = (days[day] || 0) + r.amount;
-      });
+db.push(record);
+saveData();
 
-      const labels = Object.keys(days).sort((a,b) => a - b);
-      const data = labels.map(d => days[d]);
+$('patient').value='';
+$('otherDoctor').value='';
+$('note').value='';
+$('toothRows').innerHTML='';
+addToothRow();
+$('doctorType').value='self';
+toggleDoctor();
+$('date').value=localDate();
 
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+alert('Hasta kaydı başarıyla eklendi.');
+}
 
-      chartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels.map(l => l + ' Gün'),
-          datasets: [{
-            label: 'Günlük Kazanç (€)',
-            data: data,
-            backgroundColor: '#0d9488',
-            borderRadius: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
-          }
-        }
-      });
-    }
+function deleteRecord(id){
+if(confirm('Bu hasta kaydını silmek istediğine emin misin?')){
+db=db.filter(r=>r.id!==id);
+saveData();
+}
+}
 
-    function exportData() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `dental_pro_backup_${new Date().toISOString().split('T')[0]}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
+function totalOf(record){
+if(Array.isArray(record.lines)){
+return record.lines.reduce((sum,line)=>sum+(Number(line.amount)||0),0);
+}
+return Number(record.amount)||0;
+}
 
-    function importData(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+function render(){
+const month=$('reportMonth').value;
+const today=localDate();
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const imported = JSON.parse(e.target.result);
-          if (Array.isArray(imported)) {
-            db = imported;
-            saveData();
-            alert("Veriler başarıyla yüklendi.");
-          } else {
-            alert("Geçersiz yedek dosyası.");
-          }
-        } catch (err) {
-          alert("Dosya okunurken bir hata oluştu.");
-        }
-      };
-      reader.readAsText(file);
-    }
-  </script>
+const monthly=db.filter(r=>r.date&&r.date.slice(0,7)===month);
+const total=monthly.reduce((s,r)=>s+totalOf(r),0);
+
+const todayTotal=db
+.filter(r=>r.date===today)
+.reduce((s,r)=>s+totalOf(r),0);
+
+const selfTotal=monthly
+.filter(r=>r.doctorType!=='other')
+.reduce((s,r)=>s+totalOf(r),0);
+
+const count=monthly.reduce((s,r)=>s+(r.lines?.length||1),0);
+
+$('statTotal').textContent=money(total);
+$('statToday').textContent=money(todayTotal);
+$('statSelf').textContent=money(selfTotal);
+$('statCount').textContent=count;
+
+$('heroTitle').textContent=month===today.slice(0,7)?'Bu ay kazancın':month+' kazancı';
+$('heroFoot').textContent=monthly.length
+?monthly.length+' hasta ziyareti · '+count+' işlem kalemi'
+:'Bu dönem henüz kayıt bulunmuyor';
+
+const sorted=[...monthly].sort((a,b)=>b.date.localeCompare(a.date));
+
+$('recordList').innerHTML=sorted.length?sorted.map(record=>{
+const lines=Array.isArray(record.lines)?record.lines:[{
+tooth:record.tooth||'',
+procedure:record.procedure||'İşlem',
+amount:record.amount||0
+}];
+
+const doctor=record.doctorType==='other'
+?' · Dr. '+(record.otherDoctor||'Diğer')
+:' · Ben yaptım';
+
+return `
+<article class="record">
+<div class="record-top">
+<div>
+<div class="patient">${escapeHTML(record.patient)}</div>
+<div class="meta">${escapeHTML(record.date)}${escapeHTML(doctor)}</div>
+</div>
+<div class="sum">${money(totalOf(record))}</div>
+</div>
+<div class="chips">
+${lines.map(line=>`
+<span class="chip">
+Diş ${escapeHTML(line.tooth||'-')} ·
+${escapeHTML(line.procedure)} ·
+${money(line.amount)}
+</span>`).join('')}
+</div>
+${record.note?`<div class="meta">Not: ${escapeHTML(record.note)}</div>`:''}
+<div class="actions">
+<button class="delete" data-delete="${escapeHTML(record.id)}">Kaydı sil</button>
+</div>
+</article>`;
+}).join(''):'<div class="empty">Bu ay henüz kayıt yok.<br>İlk hasta kaydını yukarıdan ekleyebilirsin.</div>';
+
+document.querySelectorAll('[data-delete]').forEach(button=>{
+button.addEventListener('click',()=>deleteRecord(button.dataset.delete));
+});
+
+renderChart(monthly);
+}
+
+function renderChart(records){
+const canvas=$('monthlyChart');
+
+if(chart){
+chart.destroy();
+chart=null;
+}
+
+const sums={};
+
+records.forEach(record=>{
+sums[record.date]=(sums[record.date]||0)+totalOf(record);
+});
+
+const labels=Object.keys(sums).sort();
+const values=labels.map(date=>sums[date]);
+
+chart=new Chart(canvas,{
+type:'bar',
+data:{
+labels:labels.map(date=>date.slice(8,10)+'.'+date.slice(5,7)),
+datasets:[{
+data:values,
+backgroundColor:'#35d0bd',
+borderRadius:7,
+maxBarThickness:28
+}]
+},
+options:{
+maintainAspectRatio:false,
+responsive:true,
+plugins:{
+legend:{display:false},
+tooltip:{callbacks:{label:context=>money(context.raw)}}
+},
+scales:{
+x:{ticks:{color:'#91a5ba'},grid:{display:false}},
+y:{ticks:{color:'#91a5ba',callback:value=>'€'+value},grid:{color:'#263b52'}}
+}
+}
+});
+}
+
+function switchTab(tab){
+$('tabList').classList.toggle('active',tab==='list');
+$('tabChart').classList.toggle('active',tab==='chart');
+$('listView').classList.toggle('hidden',tab!=='list');
+$('chartView').classList.toggle('hidden',tab!=='chart');
+
+if(tab==='chart'){
+renderChart(db.filter(r=>r.date?.slice(0,7)===$('reportMonth').value));
+}
+}
+
+function exportData(){
+const backup={
+app:'Dental Pro',
+version:1,
+exportedAt:new Date().toISOString(),
+records:db
+};
+
+const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+const url=URL.createObjectURL(blob);
+const link=document.createElement('a');
+
+link.href=url;
+link.download='dental-pro-yedek-'+localDate()+'.json';
+link.click();
+
+URL.revokeObjectURL(url);
+}
+
+function importData(event){
+const file=event.target.files[0];
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=()=>{
+try{
+const parsed=JSON.parse(reader.result);
+const incoming=Array.isArray(parsed)?parsed:parsed.records;
+
+if(!Array.isArray(incoming)){
+throw new Error('Geçersiz yedek');
+}
+
+if(!incoming.every(r=>r&&typeof r.patient==='string'&&typeof r.date==='string')){
+throw new Error('Geçersiz kayıt');
+}
+
+if(!confirm(incoming.length+' kayıt yüklenecek. Mevcut kayıtların üzerine yazılsın mı?')){
+return;
+}
+
+db=incoming;
+saveData();
+alert('Yedek başarıyla yüklendi.');
+
+}catch(error){
+alert('Yedek dosyası geçersiz veya okunamadı.');
+}finally{
+event.target.value='';
+}
+};
+
+reader.readAsText(file);
+}
+
+$('addTooth').addEventListener('click',()=>addToothRow());
+$('doctorType').addEventListener('change',toggleDoctor);
+$('recordForm').addEventListener('submit',saveRecord);
+$('reportMonth').addEventListener('change',render);
+
+$('tabList').addEventListener('click',()=>switchTab('list'));
+$('tabChart').addEventListener('click',()=>switchTab('chart'));
+
+$('exportBtn').addEventListener('click',exportData);
+$('importBtn').addEventListener('click',()=>$('fileInput').click());
+$('fileInput').addEventListener('change',importData);
+
+(function init(){
+const today=localDate();
+$('date').value=today;
+$('reportMonth').value=today.slice(0,7);
+loadData();
+addToothRow();
+toggleDoctor();
+render();
+})();
+</script>
 </body>
-    </html>
+</html>
