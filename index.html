@@ -4,153 +4,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diş Hekimi Kazanç Takibi</title>
+<meta name="theme-color" content="#102b46">
+<title>Dental Pro | Kazanç Takibi</title>
 <style>
+:root {
+  --navy:#102b46;
+  --blue:#176b82;
+  --teal:#21a6a0;
+  --bg:#f2f6f9;
+  --white:#fff;
+  --text:#24384b;
+  --muted:#788b9c;
+  --line:#e3ebf0;
+}
 *{box-sizing:border-box}
-body{margin:0;padding:18px;background:#f2f5f8;font-family:Arial,sans-serif;color:#243247}
-.container{max-width:650px;margin:auto}
-h1{font-size:25px;color:#176b70}
-.card{background:white;padding:17px;border-radius:14px;margin:14px 0;box-shadow:0 2px 9px #0000000c}
-input,button{width:100%;padding:13px;margin:6px 0;border:1px solid #d8e0e7;border-radius:9px;font-size:16px}
-button{background:#176b70;color:white;border:0;font-weight:bold;cursor:pointer}
-button.secondary{background:#e8eff1;color:#176b70}
-button.danger{background:#b94141;width:auto;padding:9px 13px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{background:#e8f3f2;padding:14px;border-radius:10px}
-.stat strong{display:block;font-size:21px;margin-top:8px}
-.item{border-bottom:1px solid #eee;padding:12px 0}
-.item:last-child{border:0}
-.small{font-size:13px;color:#697887}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,sans-serif;
+}
+header{
+  background:linear-gradient(135deg,#102b46,#176b82);
+  color:white;padding:27px 20px 35px;
+}
+.header-inner,.container{max-width:760px;margin:auto}
+.logo{font-size:13px;letter-spacing:2px;opacity:.8}
+header h1{margin:12px 0 5px;font-size:27px}
+header p{margin:0;color:#d4e8ee;font-size:14px}
+.container{padding:0 15px 30px;margin-top:-17px}
+.card{
+  background:white;border-radius:16px;padding:19px;
+  margin-bottom:15px;box-shadow:0 5px 20px #102b4610;
+}
+h2{font-size:17px;margin:0 0 17px;color:var(--navy)}
+label{
+  display:block;font-size:13px;font-weight:bold;
+  margin:13px 0 6px;color:#536a7d;
+}
+input,select,textarea{
+  width:100%;padding:13px;border:1px solid var(--line);
+  border-radius:10px;background:#fbfdfe;color:var(--text);
+  font-size:15px;outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--teal);
+}
+textarea{resize:vertical;min-height:75px}
+button{
+  border:0;border-radius:10px;padding:14px;
+  font-size:15px;font-weight:bold;cursor:pointer;
+}
+.primary{
+  background:var(--teal);color:white;width:100%;margin-top:18px;
+}
+.secondary{background:#eaf3f5;color:var(--blue);width:100%}
+.danger{background:#fff0ef;color:#b64b46;padding:9px 12px}
+.stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.stat{
+  background:#f1f7f9;border:1px solid #e5eff2;
+  border-radius:12px;padding:15px;min-width:0;
+}
+.stat span{font-size:12px;color:var(--muted)}
+.stat strong{
+  display:block;font-size:20px;color:var(--navy);
+  margin-top:9px;overflow-wrap:anywhere;
+}
+.stat.accent{background:#e9f7f5;border-color:#d8efeb}
+.stat.accent strong{color:#168b82}
+.small{font-size:12px;color:var(--muted);line-height:1.6}
+.record{
+  border-bottom:1px solid var(--line);padding:14px 0;
+}
+.record:last-child{border:0}
+.record-top{display:flex;justify-content:space-between;gap:10px}
+.record-name{font-weight:bold;color:var(--navy)}
+.record-amount{font-weight:bold;color:#168b82;white-space:nowrap}
+.record-info{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
+.record-actions{display:flex;justify-content:flex-end;margin-top:8px}
+.empty{text-align:center;padding:20px;color:var(--muted);font-size:14px}
+.pill{
+  display:inline-block;background:#e8f5f3;color:#168b82;
+  border-radius:20px;padding:5px 9px;font-size:11px;margin-top:7px;
+}
+.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hidden{display:none}
+@media(max-width:390px){
+  .stat strong{font-size:17px}
+  header h1{font-size:24px}
+}
 </style>
 </head>
 <body>
-<div class="container">
-<h1>🦷 Diş Kazanç Takibi</h1>
 
-<div class="card">
-<h3>Yeni işlem ekle</h3>
-<label>Tarih</label>
-<input type="date" id="date">
-<label>Yapılan işlem</label>
-<input id="procedure" placeholder="Örn: Dolgu, kanal, çekim">
-<label>Diş numarası (isteğe bağlı)</label>
-<input id="tooth" placeholder="Örn: 16">
-<label>Kazanç (TL)</label>
-<input type="number" id="amount" placeholder="Kazanç miktarı" min="0" step="0.01">
-<label>Not (isteğe bağlı)</label>
-<input id="note" placeholder="İşlem notu">
-<button onclick="addRecord()">İşlemi Kaydet</button>
-</div>
+<header>
+  <div class="header-inner">
+    <div class="logo">DENTAL PROFESSIONAL</div>
+    <h1>Dental Pro</h1>
+    <p>Kişisel işlem ve kazanç takip paneli</p>
+  </div>
+</header>
 
-<div class="card">
-<h3>Bu ay</h3>
-<div class="stats">
-<div class="stat">Toplam kazanç<strong id="total">0 TL</strong></div>
-<div class="stat">İşlem sayısı<strong id="count">0</strong></div>
-</div>
-</div>
+<main class="container">
 
-<div class="card">
-<h3>Aylık rapor</h3>
-<input type="month" id="month" onchange="render()">
-<div class="stats">
-<div class="stat">Kazanç<strong id="monthTotal">0 TL</strong></div>
-<div class="stat">İşlem<strong id="monthCount">0</strong></div>
-</div>
-</div>
+  <section class="card">
+    <h2>＋ Yeni işlem kaydı</h2>
 
-<div class="card">
-<h3>İşlem geçmişi</h3>
-<div id="records"></div>
-</div>
+    <label for="date">İşlem tarihi *</label>
+    <input type="date" id="date">
 
-<div class="card">
-<h3>Veri yedekleme</h3>
-<p class="small">Kayıtlarını telefonuna yedekleyebilir, daha sonra geri yükleyebilirsin.</p>
-<button class="secondary" onclick="backup()">Yedek indir</button>
-<label class="small">Yedek dosyasını seç</label>
-<input type="file" id="restoreFile" accept=".json">
-<button class="secondary" onclick="restore()">Yedeği geri yükle</button>
-</div>
+    <label for="patient">Hasta adı *</label>
+    <input type="text" id="patient" placeholder="Hasta adı">
 
-<p class="small">Veriler bu tarayıcıda saklanır. Tarayıcı verilerini silersen kayıtların kaybolabilir. Düzenli yedek al. Hasta adı veya kişisel sağlık bilgisi kaydetme.</p>
-</div>
+    <label for="tooth">Diş numarası</label>
+    <input type="text" id="tooth" placeholder="Örn. 16">
+
+    <label for="procedure">Yapılan işlem *</label>
+    <input type="text" id="procedure" placeholder="Örn. Dolgu, kanal tedavisi">
+
+    <label for="doctorType">İşlemi yapan doktor *</label>
+    <select id="doctorType" onchange="toggleDoctor()">
+      <option value="self">Ben yaptım</option>
+      <option value="other">Diğer doktor yaptı</option>
+    </select>
+
+    <div id="otherDoctorBox" class="hidden">
+      <label for="otherDoctor">Doktor arkadaşının adı *</label>
+      <input type="text" id="otherDoctor" placeholder="Doktor adı">
+    </div>
+
+    <label for="amount">Kazanç (€) *</label>
+    <input type="number" id="amount" min="0" step="0.01" placeholder="Örn. 50">
+
+    <label for="note">Ek bilgi</label>
+    <textarea id="note" placeholder="İşlemle ilgili ek notlar..."></textarea>
+
+    <button class="primary" onclick="addRecord()">İşlemi Kaydet</button>
+  </section>
+
+  <section class="card">
+    <h2>Genel durum</h2>
+    <div class="stats">
+      <div class="stat accent">
+        <span>Bu ay toplam kazanç</span>
+        <strong id="currentTotal">0 €</strong>
+      </div>
+      <div class="stat">
+        <span>Bu ay işlem sayısı</span>
+        <strong id="currentCount">0</strong>
+      </div>
+      <div class="stat">
+        <span>Kendi işlemlerim</span>
+        <strong id="currentSelf">0 €</strong>
+      </div>
+      <div class="stat">
+        <span>Diğer doktorlar</span>
+        <strong id="currentOther">0 €</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Aylık rapor</h2>
+    <label for="month">Raporlanacak ay</label>
+    <input type="month" id="month" onchange="render()">
+    <div class="stats" style="margin-top:12px">
+      <div class="stat accent">
+        <span>Toplam kazanç</span>
+        <strong id="reportTotal">0 €</strong>
+      </div>
+      <div class="stat">
+        <span>Toplam işlem</span>
+        <strong id="reportCount">0</strong>
+      </div>
+      <div class="stat">
+        <span>Kendi kazancım</span>
+        <strong id="reportSelf">0 €</strong>
+      </div>
+      <div class="stat">
+        <span>Diğer doktorların kazancı</span>
+        <strong id="reportOther">0 €</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>İşlem geçmişi</h2>
+    <div id="records"></div>
+  </section>
+
+  <section class="card">
+    <h2>Veri yedekleme</h2>
+    <p class="small">Kayıtlarını telefonuna JSON dosyası olarak indir. Telefon veya tarayıcı değiştirirsen bu dosyayı kullanarak geri yükleyebilirsin.</p>
+    <button class="secondary" onclick="backup()">Yedeği indir</button>
+    <label for="restoreFile">Yedek dosyasını seç</label>
+    <input type="file" id="restoreFile" accept=".json,application/json">
+    <button class="secondary" style="margin-top:10px" onclick="restore()">Yedeği geri yükle</button>
+  </section>
+
+  <p class="small">
+    Veriler bu tarayıcıda saklanır. Düzenli yedek al.
+    Hasta bilgileri hassas olduğundan gerçek hasta verilerini
+    kaydetmeden önce kurumunun veri güvenliği ve gizlilik
+    kurallarını dikkate al.
+  </p>
+</main>
 
 <script>
 let data = [];
+
 try {
-  data = JSON.parse(localStorage.getItem("disKayitlari") || "[]");
-  if (!Array.isArray(data)) data = [];
+  const saved = JSON.parse(localStorage.getItem("dentalProRecords") || "[]");
+  if (Array.isArray(saved)) data = saved;
 } catch(e) {
   data = [];
 }
 
-const today = new Date();
-const dateInput = document.getElementById("date");
-const monthInput = document.getElementById("month");
-
-function dateString(d) {
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function localDate(d) {
+  return d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
 }
 
-dateInput.value = dateString(today);
-monthInput.value = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0");
+const now = new Date();
+document.getElementById("date").value = localDate(now);
+document.getElementById("month").value = localDate(now).slice(0,7);
 
-function money(value) {
-  return Number(value).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL";
+function euro(value) {
+  return Number(value || 0).toLocaleString("de-DE", {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }) + " €";
 }
 
-function save() {
-  localStorage.setItem("disKayitlari",JSON.stringify(data));
+function toggleDoctor() {
+  const other = document.getElementById("doctorType").value === "other";
+  document.getElementById("otherDoctorBox").classList.toggle("hidden", !other);
+}
+
+function persist() {
+  localStorage.setItem("dentalProRecords", JSON.stringify(data));
   render();
 }
 
 function addRecord() {
-  const date = dateInput.value;
+  const date = document.getElementById("date").value;
+  const patient = document.getElementById("patient").value.trim();
+  const tooth = document.getElementById("tooth").value.trim();
   const procedure = document.getElementById("procedure").value.trim();
-  const amount = Number(document.getElementById("amount").value);
+  const doctorType = document.getElementById("doctorType").value;
+  const doctorName = document.getElementById("otherDoctor").value.trim();
+  const amountText = document.getElementById("amount").value;
+  const amount = Number(amountText);
+  const note = document.getElementById("note").value.trim();
 
-  if (!date || !procedure || document.getElementById("amount").value === "" || !Number.isFinite(amount) || amount < 0) {
-    alert("Lütfen tarih, işlem ve geçerli kazanç miktarını gir.");
+  if (!date || !patient || !procedure || amountText === "" ||
+      !Number.isFinite(amount) || amount < 0) {
+    alert("Lütfen tarih, hasta adı, işlem ve geçerli kazanç miktarını gir.");
+    return;
+  }
+
+  if (doctorType === "other" && !doctorName) {
+    alert("Diğer doktorun adını gir.");
     return;
   }
 
   data.push({
-    id: Date.now().toString()+"-"+Math.random().toString(16).slice(2),
-    date,
-    procedure,
-    tooth: document.getElementById("tooth").value.trim(),
-    amount,
-    note: document.getElementById("note").value.trim()
+    id: Date.now().toString() + Math.random().toString(16).slice(2),
+    date, patient, tooth, procedure, doctorType,
+    doctorName: doctorType === "other" ? doctorName : "",
+    amount, note
   });
 
-  document.getElementById("procedure").value = "";
+  persist();
+
+  document.getElementById("patient").value = "";
   document.getElementById("tooth").value = "";
+  document.getElementById("procedure").value = "";
   document.getElementById("amount").value = "";
   document.getElementById("note").value = "";
+  document.getElementById("otherDoctor").value = "";
+  document.getElementById("doctorType").value = "self";
+  toggleDoctor();
 
-  save();
-  alert("İşlem kaydedildi.");
+  alert("İşlem başarıyla kaydedildi.");
 }
 
-function deleteRecord(id) {
-  if (!confirm("Bu işlemi silmek istediğine emin misin?")) return;
+function removeRecord(id) {
+  if (!confirm("Bu işlem kaydını silmek istediğine emin misin?")) return;
   data = data.filter(x => x.id !== id);
-  save();
+  persist();
+}
+
+function sum(arr) {
+  return arr.reduce((total,x) => total + Number(x.amount || 0), 0);
 }
 
 function render() {
-  const selectedMonth = monthInput.value;
-  const monthly = data.filter(x => x.date && x.date.startsWith(selectedMonth));
-  const currentMonth = dateString(today).slice(0,7);
+  const currentMonth = localDate(new Date()).slice(0,7);
+  const selectedMonth = document.getElementById("month").value;
+
   const current = data.filter(x => x.date && x.date.startsWith(currentMonth));
+  const monthly = data.filter(x => x.date && x.date.startsWith(selectedMonth));
 
-  const sum = arr => arr.reduce((total,x) => total + Number(x.amount || 0),0);
+  const selfCurrent = current.filter(x => x.doctorType !== "other");
+  const otherCurrent = current.filter(x => x.doctorType === "other");
+  const selfMonthly = monthly.filter(x => x.doctorType !== "other");
+  const otherMonthly = monthly.filter(x => x.doctorType === "other");
 
-  document.getElementById("total").textContent = money(sum(current));
-  document.getElementById("count").textContent = current.length;
-  document.getElementById("monthTotal").textContent = money(sum(monthly));
-  document.getElementById("monthCount").textContent = monthly.length;
+  document.getElementById("currentTotal").textContent = euro(sum(current));
+  document.getElementById("currentCount").textContent = current.length;
+  document.getElementById("currentSelf").textContent = euro(sum(selfCurrent));
+  document.getElementById("currentOther").textContent = euro(sum(otherCurrent));
+
+  document.getElementById("reportTotal").textContent = euro(sum(monthly));
+  document.getElementById("reportCount").textContent = monthly.length;
+  document.getElementById("reportSelf").textContent = euro(sum(selfMonthly));
+  document.getElementById("reportOther").textContent = euro(sum(otherMonthly));
 
   const list = document.getElementById("records");
   list.innerHTML = "";
@@ -158,40 +328,72 @@ function render() {
   const sorted = [...monthly].sort((a,b) => b.date.localeCompare(a.date));
 
   if (!sorted.length) {
-    list.textContent = "Bu ay henüz kayıt yok.";
+    list.innerHTML = '<div class="empty">Bu ay henüz işlem kaydı bulunmuyor.</div>';
     return;
   }
 
   sorted.forEach(x => {
-    const item = document.createElement("div");
-    item.className = "item";
+    const record = document.createElement("div");
+    record.className = "record";
+
+    const top = document.createElement("div");
+    top.className = "record-top";
+
+    const name = document.createElement("div");
+    name.className = "record-name";
+    name.textContent = x.patient || "İsimsiz kayıt";
+
+    const amount = document.createElement("div");
+    amount.className = "record-amount";
+    amount.textContent = euro(x.amount);
+
+    top.append(name,amount);
 
     const info = document.createElement("div");
-    info.textContent = x.date+" • "+x.procedure+
-      (x.tooth ? " • Diş: "+x.tooth : "");
+    info.className = "record-info";
+    info.textContent =
+      x.date + " • " + (x.tooth ? "Diş: " + x.tooth + " • " : "") +
+      (x.procedure || "");
 
-    const detail = document.createElement("div");
-    detail.className = "small";
-    detail.textContent = money(x.amount)+(x.note ? " • "+x.note : "");
+    const doctor = document.createElement("div");
+    doctor.className = "pill";
+    doctor.textContent = x.doctorType === "other"
+      ? "Doktor: " + (x.doctorName || "Diğer doktor")
+      : "Kendi işlemim";
+
+    record.append(top,info,doctor);
+
+    if (x.note) {
+      const note = document.createElement("div");
+      note.className = "record-info";
+      note.textContent = "Ek bilgi: " + x.note;
+      record.appendChild(note);
+    }
+
+    const actions = document.createElement("div");
+    actions.className = "record-actions";
 
     const del = document.createElement("button");
     del.className = "danger";
-    del.textContent = "Sil";
-    del.onclick = () => deleteRecord(x.id);
+    del.textContent = "Kaydı sil";
+    del.onclick = () => removeRecord(x.id);
 
-    item.append(info,detail,del);
-    list.appendChild(item);
+    actions.appendChild(del);
+    record.appendChild(actions);
+    list.appendChild(record);
   });
 }
 
 function backup() {
-  const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const blob = new Blob([JSON.stringify(data,null,2)], {
+    type:"application/json"
+  });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "dis-kazanc-yedek.json";
+  a.download = "dental-pro-yedek.json";
   a.click();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url),1000);
 }
 
 function restore() {
@@ -207,16 +409,18 @@ function restore() {
       const imported = JSON.parse(reader.result);
       if (!Array.isArray(imported) || !imported.every(x =>
         x && typeof x.date === "string" &&
+        typeof x.patient === "string" &&
         typeof x.procedure === "string" &&
         Number.isFinite(Number(x.amount))
       )) {
-        throw new Error("Geçersiz yedek");
+        throw new Error("Invalid backup");
       }
 
       if (!confirm("Mevcut kayıtların yerine yedek dosyasındaki kayıtlar yüklenecek. Devam edilsin mi?")) return;
+
       data = imported;
-      save();
-      alert("Yedek başarıyla yüklendi.");
+      persist();
+      alert("Yedek başarıyla geri yüklendi.");
     } catch(e) {
       alert("Dosya okunamadı veya yedek geçersiz.");
     }
