@@ -7,75 +7,109 @@
 <meta name="theme-color" content="#102b46">
 <title>Dental Pro | Kazanç Takibi</title>
 <style>
-:root {
+:root{
   --navy:#102b46;
+  --navy2:#173c59;
   --blue:#176b82;
   --teal:#21a6a0;
-  --bg:#f2f6f9;
+  --bg:#f1f5f9;
   --white:#fff;
   --text:#24384b;
-  --muted:#788b9c;
-  --line:#e3ebf0;
+  --muted:#8293a3;
+  --line:#e5edf2;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:15px}
 body{
   margin:0;background:var(--bg);color:var(--text);
   font-family:Arial,sans-serif;
 }
 header{
-  background:linear-gradient(135deg,#102b46,#176b82);
-  color:white;padding:27px 20px 35px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:white;padding:27px 20px 42px;
 }
 .header-inner,.container{max-width:760px;margin:auto}
-.logo{font-size:13px;letter-spacing:2px;opacity:.8}
-header h1{margin:12px 0 5px;font-size:27px}
+.logo{font-size:11px;letter-spacing:2.5px;color:#b9d7e2;font-weight:bold}
+.hero-row{
+  display:flex;align-items:flex-end;
+  justify-content:space-between;gap:12px;
+}
+header h1{margin:12px 0 5px;font-size:29px}
 header p{margin:0;color:#d4e8ee;font-size:14px}
-.container{padding:0 15px 30px;margin-top:-17px}
+.hero-date{font-size:12px;color:#d4e8ee}
+.container{padding:0 15px 105px;margin-top:-20px}
 .card{
-  background:white;border-radius:16px;padding:19px;
-  margin-bottom:15px;box-shadow:0 5px 20px #102b4610;
+  background:white;border-radius:18px;padding:19px;
+  margin-bottom:15px;box-shadow:0 5px 22px #102b4610;
 }
 h2{font-size:17px;margin:0 0 17px;color:var(--navy)}
+.section-head{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:10px;
+}
+.section-head h2{margin-bottom:0}
 label{
   display:block;font-size:13px;font-weight:bold;
   margin:13px 0 6px;color:#536a7d;
 }
 input,select,textarea{
-  width:100%;padding:13px;border:1px solid var(--line);
-  border-radius:10px;background:#fbfdfe;color:var(--text);
-  font-size:15px;outline:none;
+  width:100%;padding:14px;border:1px solid var(--line);
+  border-radius:11px;background:#fbfdfe;
+  color:var(--text);font-size:15px;outline:none;
 }
 input:focus,select:focus,textarea:focus{
   border-color:var(--teal);
+  box-shadow:0 0 0 3px #21a6a015;
 }
 textarea{resize:vertical;min-height:75px}
 button{
-  border:0;border-radius:10px;padding:14px;
+  border:0;border-radius:11px;padding:14px;
   font-size:15px;font-weight:bold;cursor:pointer;
 }
 .primary{
-  background:var(--teal);color:white;width:100%;margin-top:18px;
+  background:linear-gradient(135deg,var(--teal),#168c91);
+  color:white;width:100%;margin-top:18px;
 }
 .secondary{background:#eaf3f5;color:var(--blue);width:100%}
 .danger{background:#fff0ef;color:#b64b46;padding:9px 12px}
 .stats{
   display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  margin-top:14px;
 }
 .stat{
-  background:#f1f7f9;border:1px solid #e5eff2;
-  border-radius:12px;padding:15px;min-width:0;
+  background:#f3f7fa;border:1px solid #e8eef2;
+  border-radius:14px;padding:16px;min-width:0;
 }
-.stat span{font-size:12px;color:var(--muted)}
+.stat span{font-size:12px;color:var(--muted);line-height:1.4}
 .stat strong{
-  display:block;font-size:20px;color:var(--navy);
+  display:block;font-size:21px;color:var(--navy);
   margin-top:9px;overflow-wrap:anywhere;
 }
 .stat.accent{background:#e9f7f5;border-color:#d8efeb}
 .stat.accent strong{color:#168b82}
 .small{font-size:12px;color:var(--muted);line-height:1.6}
-.record{
-  border-bottom:1px solid var(--line);padding:14px 0;
+.pill{
+  display:inline-block;background:#e8f5f3;color:#168b82;
+  border-radius:20px;padding:6px 10px;font-size:11px;
 }
+.chart-wrap{
+  display:flex;align-items:flex-end;gap:9px;
+  height:165px;padding:15px 4px 0;
+  border-bottom:1px solid var(--line);
+}
+.chart-col{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  height:100%;gap:7px;min-width:0;
+}
+.chart-bar{
+  width:100%;max-width:34px;min-height:3px;
+  border-radius:7px 7px 2px 2px;
+  background:linear-gradient(180deg,#35c4b5,#176b82);
+}
+.chart-label{font-size:10px;color:var(--muted)}
+.chart-value{font-size:9px;color:var(--muted);white-space:nowrap}
+.record{border-bottom:1px solid var(--line);padding:15px 0}
 .record:last-child{border:0}
 .record-top{display:flex;justify-content:space-between;gap:10px}
 .record-name{font-weight:bold;color:var(--navy)}
@@ -83,15 +117,31 @@ button{
 .record-info{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
 .record-actions{display:flex;justify-content:flex-end;margin-top:8px}
 .empty{text-align:center;padding:20px;color:var(--muted);font-size:14px}
-.pill{
-  display:inline-block;background:#e8f5f3;color:#168b82;
-  border-radius:20px;padding:5px 9px;font-size:11px;margin-top:7px;
-}
-.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .hidden{display:none}
+.quick-fab{
+  position:fixed;right:20px;bottom:83px;z-index:10;
+  border-radius:50%;width:58px;height:58px;padding:0;
+  background:var(--teal);color:white;font-size:29px;
+  box-shadow:0 8px 22px #102b4640;
+}
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:9;
+  background:white;border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;
+  padding:10px 8px calc(10px + env(safe-area-inset-bottom));
+  box-shadow:0 -5px 18px #102b460d;
+}
+.bottom-nav a{
+  color:#718496;text-decoration:none;font-size:11px;
+  text-align:center;display:flex;flex-direction:column;
+  gap:4px;align-items:center;min-width:65px;
+}
+.bottom-nav b{font-size:20px;color:var(--navy);line-height:1}
+.bottom-nav a.active{color:var(--teal);font-weight:bold}
 @media(max-width:390px){
-  .stat strong{font-size:17px}
-  header h1{font-size:24px}
+  .stat strong{font-size:18px}
+  header h1{font-size:25px}
+  .quick-fab{right:15px;bottom:78px}
 }
 </style>
 </head>
@@ -100,15 +150,53 @@ button{
 <header>
   <div class="header-inner">
     <div class="logo">DENTAL PROFESSIONAL</div>
-    <h1>Dental Pro</h1>
-    <p>Kişisel işlem ve kazanç takip paneli</p>
+    <div class="hero-row">
+      <div>
+        <h1>Dental Pro</h1>
+        <p>Kazanç takip panelin</p>
+      </div>
+      <div class="hero-date" id="todayLabel"></div>
+    </div>
   </div>
 </header>
 
 <main class="container">
 
+  <section class="card" id="overview">
+    <h2>Bugünkü özet</h2>
+    <div class="stats" style="margin-top:0">
+      <div class="stat accent">
+        <span>Bugünkü toplam kazanç</span>
+        <strong id="todayTotal">0 €</strong>
+      </div>
+      <div class="stat">
+        <span>Bugünkü işlem sayısı</span>
+        <strong id="todayCount">0</strong>
+      </div>
+      <div class="stat">
+        <span>Bu ay toplam kazanç</span>
+        <strong id="currentTotal">0 €</strong>
+      </div>
+      <div class="stat">
+        <span>Bu ay işlem sayısı</span>
+        <strong id="currentCount">0</strong>
+      </div>
+    </div>
+  </section>
+
   <section class="card">
-    <h2>＋ Yeni işlem kaydı</h2>
+    <div class="section-head">
+      <h2>Kazanç grafiği</h2>
+      <span class="pill">Son 7 gün</span>
+    </div>
+    <div id="earningsChart" class="chart-wrap"></div>
+  </section>
+
+  <section class="card" id="newRecord">
+    <div class="section-head">
+      <h2>＋ Yeni işlem</h2>
+      <span class="pill">Hızlı kayıt</span>
+    </div>
 
     <label for="date">İşlem tarihi *</label>
     <input type="date" id="date">
@@ -129,7 +217,7 @@ button{
     </select>
 
     <div id="otherDoctorBox" class="hidden">
-      <label for="otherDoctor">Doktor arkadaşının adı *</label>
+      <label for="otherDoctor">Doktor adı *</label>
       <input type="text" id="otherDoctor" placeholder="Doktor adı">
     </div>
 
@@ -142,33 +230,11 @@ button{
     <button class="primary" onclick="addRecord()">İşlemi Kaydet</button>
   </section>
 
-  <section class="card">
-    <h2>Genel durum</h2>
-    <div class="stats">
-      <div class="stat accent">
-        <span>Bu ay toplam kazanç</span>
-        <strong id="currentTotal">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Bu ay işlem sayısı</span>
-        <strong id="currentCount">0</strong>
-      </div>
-      <div class="stat">
-        <span>Kendi işlemlerim</span>
-        <strong id="currentSelf">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Diğer doktorlar</span>
-        <strong id="currentOther">0 €</strong>
-      </div>
-    </div>
-  </section>
-
-  <section class="card">
+  <section class="card" id="monthlyReport">
     <h2>Aylık rapor</h2>
     <label for="month">Raporlanacak ay</label>
     <input type="month" id="month" onchange="render()">
-    <div class="stats" style="margin-top:12px">
+    <div class="stats">
       <div class="stat accent">
         <span>Toplam kazanç</span>
         <strong id="reportTotal">0 €</strong>
@@ -177,18 +243,10 @@ button{
         <span>Toplam işlem</span>
         <strong id="reportCount">0</strong>
       </div>
-      <div class="stat">
-        <span>Kendi kazancım</span>
-        <strong id="reportSelf">0 €</strong>
-      </div>
-      <div class="stat">
-        <span>Diğer doktorların kazancı</span>
-        <strong id="reportOther">0 €</strong>
-      </div>
     </div>
   </section>
 
-  <section class="card">
+  <section class="card" id="recordsSection">
     <h2>İşlem geçmişi</h2>
     <div id="records"></div>
   </section>
@@ -209,6 +267,16 @@ button{
     kurallarını dikkate al.
   </p>
 </main>
+
+<button class="quick-fab" aria-label="Hızlı işlem ekle"
+onclick="document.getElementById('newRecord').scrollIntoView({behavior:'smooth'})">＋</button>
+
+<nav class="bottom-nav">
+  <a class="active" href="#overview"><b>⌂</b>Özet</a>
+  <a href="#newRecord"><b>＋</b>İşlem ekle</a>
+  <a href="#monthlyReport"><b>▤</b>Raporlar</a>
+  <a href="#recordsSection"><b>◷</b>Geçmiş</a>
+</nav>
 
 <script>
 let data = [];
@@ -303,25 +371,62 @@ function sum(arr) {
 function render() {
   const currentMonth = localDate(new Date()).slice(0,7);
   const selectedMonth = document.getElementById("month").value;
-
   const current = data.filter(x => x.date && x.date.startsWith(currentMonth));
   const monthly = data.filter(x => x.date && x.date.startsWith(selectedMonth));
 
-  const selfCurrent = current.filter(x => x.doctorType !== "other");
-  const otherCurrent = current.filter(x => x.doctorType === "other");
-  const selfMonthly = monthly.filter(x => x.doctorType !== "other");
-  const otherMonthly = monthly.filter(x => x.doctorType === "other");
+  const today = localDate(new Date());
+  const todayRecords = data.filter(x => x.date === today);
 
+  document.getElementById("todayLabel").textContent =
+    new Date().toLocaleDateString("tr-TR",{day:"numeric",month:"short"});
+  document.getElementById("todayTotal").textContent = euro(sum(todayRecords));
+  document.getElementById("todayCount").textContent = todayRecords.length;
   document.getElementById("currentTotal").textContent = euro(sum(current));
   document.getElementById("currentCount").textContent = current.length;
-  document.getElementById("currentSelf").textContent = euro(sum(selfCurrent));
-  document.getElementById("currentOther").textContent = euro(sum(otherCurrent));
-
   document.getElementById("reportTotal").textContent = euro(sum(monthly));
   document.getElementById("reportCount").textContent = monthly.length;
-  document.getElementById("reportSelf").textContent = euro(sum(selfMonthly));
-  document.getElementById("reportOther").textContent = euro(sum(otherMonthly));
 
+  // Son 7 günün kazanç grafiği
+  const chart = document.getElementById("earningsChart");
+  chart.innerHTML = "";
+  const days = [];
+
+  for (let i=6;i>=0;i--) {
+    const d = new Date();
+    d.setDate(d.getDate()-i);
+    const key = localDate(d);
+    const total = sum(data.filter(x => x.date === key));
+    days.push({
+      key,
+      label:d.toLocaleDateString("tr-TR",{weekday:"short"}),
+      total
+    });
+  }
+
+  const maxValue = Math.max(1,...days.map(d=>d.total));
+
+  days.forEach(d => {
+    const col = document.createElement("div");
+    col.className = "chart-col";
+
+    const value = document.createElement("span");
+    value.className = "chart-value";
+    value.textContent = d.total ? Math.round(d.total) + " €" : "–";
+
+    const bar = document.createElement("div");
+    bar.className = "chart-bar";
+    bar.style.height = Math.max(3,(d.total/maxValue)*100) + "px";
+    bar.title = d.key + ": " + euro(d.total);
+
+    const label = document.createElement("span");
+    label.className = "chart-label";
+    label.textContent = d.label;
+
+    col.append(value,bar,label);
+    chart.appendChild(col);
+  });
+
+  // Seçilen aya ait kayıtlar
   const list = document.getElementById("records");
   list.innerHTML = "";
 
@@ -398,15 +503,18 @@ function backup() {
 
 function restore() {
   const file = document.getElementById("restoreFile").files[0];
+
   if (!file) {
     alert("Önce yedek dosyasını seç.");
     return;
   }
 
   const reader = new FileReader();
+
   reader.onload = function() {
     try {
       const imported = JSON.parse(reader.result);
+
       if (!Array.isArray(imported) || !imported.every(x =>
         x && typeof x.date === "string" &&
         typeof x.patient === "string" &&
@@ -425,6 +533,7 @@ function restore() {
       alert("Dosya okunamadı veya yedek geçersiz.");
     }
   };
+
   reader.readAsText(file);
 }
 
